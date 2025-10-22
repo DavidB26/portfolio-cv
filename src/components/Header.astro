@@ -1,0 +1,62 @@
+---
+const { lang = 'es' } = Astro.props;
+const nav = [
+  { id: 'about', label: lang === 'es' ? 'Sobre mí' : 'About' },
+  { id: 'experience', label: lang === 'es' ? 'Experiencia' : 'Experience' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'projects', label: lang === 'es' ? 'Proyectos' : 'Projects' },
+  { id: 'contact', label: lang === 'es' ? 'Contacto' : 'Contact' },
+];
+---
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b">
+  <div class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
+    <a href="#top" class="font-semibold">David Beslanga</a>
+
+    <nav class="hidden md:flex items-center gap-6">
+      {nav.map((item) => (
+        <a
+          href={`#${item.id}`}
+          class="nav-link text-sm text-gray-600 hover:text-gray-900 transition"
+          data-section={item.id}
+        >{item.label}</a>
+      ))}
+    </nav>
+
+    <!-- Botón CV / idioma opcional -->
+    <div class="flex items-center gap-3">
+      <a href="/cv.pdf" class="text-sm font-medium px-3 py-1.5 rounded-md border hover:bg-gray-50">CV</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* estado activo desde JS */
+  .nav-link[aria-current="true"] {
+    color: rgb(17 24 39); /* gray-900 */
+    font-weight: 600;
+  }
+</style>
+
+<script is:raw>
+  // Scroll suave nativo
+  document.documentElement.style.scrollBehavior = 'smooth';
+
+  // Resaltar link activo con IntersectionObserver
+  const sections = Array.from(document.querySelectorAll('section[data-spy="true"]'));
+  const links = new Map(Array.from(document.querySelectorAll('.nav-link')).map(a => [a.dataset.section, a]));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.id;
+      const link = links.get(id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        // quitar activos previos
+        document.querySelectorAll('.nav-link[aria-current="true"]').forEach(el => el.setAttribute('aria-current', 'false'));
+        link.setAttribute('aria-current', 'true');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0.01 });
+
+  sections.forEach(s => io.observe(s));
+</script>

@@ -1,0 +1,21 @@
+---
+import '../styles/tailwind.css';
+import Header from '../components/Header.astro';
+const { lang = 'es', title = 'Portafolio' } = Astro.props;
+---
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <link rel="icon" href="/favicon.svg" />
+    <style>
+      /* compensa el header sticky al usar #hash */
+      :target { scroll-margin-top: 72px; }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-900" id="top">
+    <Header lang={lang} />
+    <slot />
+  </body>
+</html>
