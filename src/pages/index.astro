@@ -348,7 +348,21 @@ import { Icon } from 'astro-icon/components';
       class="space-y-6"
       action="https://formsubmit.co/contact@davidbeslanga.com"
       method="POST"
+      data-contact
+      novalidate
     >
+      <!-- Honeypot field for bots (spam protection) -->
+      <div class="hidden" aria-hidden="true">
+        <label>
+          No rellenes este campo si eres humano
+          <input
+            type="text"
+            name="_honey"
+            tabindex="-1"
+            autocomplete="off"
+          />
+        </label>
+      </div>
       <!-- Email -->
       <div>
         <label for="email" class="block text-sm font-medium text-slate-800 mb-1">
@@ -362,6 +376,9 @@ import { Icon } from 'astro-icon/components';
           placeholder="tu.email@ejemplo.com"
           class="w-full rounded-lg border border-slate-200 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
+        <p class="mt-1 text-sm text-red-600 hidden" data-error="email">
+          Por favor introduce un email válido.
+        </p>
       </div>
 
       <!-- Message -->
@@ -377,10 +394,12 @@ import { Icon } from 'astro-icon/components';
           placeholder="Cuéntame brevemente en qué puedo ayudarte"
           class="w-full rounded-lg border border-slate-200 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         ></textarea>
+        <p class="mt-1 text-sm text-red-600 hidden" data-error="message">
+          El mensaje debe tener al menos 10 caracteres.
+        </p>
       </div>
 
       <!-- Hidden fields for FormSubmit (optional, can be removed or adjusted) -->
-      <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_subject" value="Nuevo mensaje desde el portfolio" />
       <input type="hidden" name="_template" value="table" />
 
@@ -397,4 +416,47 @@ import { Icon } from 'astro-icon/components';
   </section>
 
   <footer class="py-10 text-center text-sm text-gray-500">© {new Date().getFullYear()} David Beslanga</footer>
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const forms = document.querySelectorAll('form[data-contact]');
+      forms.forEach((form) => {
+        const email = form.querySelector('input[name="email"]');
+        const message = form.querySelector('textarea[name="message"]');
+        const emailError = form.querySelector('[data-error="email"]');
+        const messageError = form.querySelector('[data-error="message"]');
+
+        form.addEventListener('submit', (event) => {
+          let valid = true;
+
+          const emailValue = email.value.trim();
+          const messageValue = message.value.trim();
+
+          // reset state
+          email.classList.remove('border-red-500');
+          message.classList.remove('border-red-500');
+          if (emailError) emailError.classList.add('hidden');
+          if (messageError) messageError.classList.add('hidden');
+
+          // simple email validation
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(emailValue)) {
+            valid = false;
+            email.classList.add('border-red-500');
+            if (emailError) emailError.classList.remove('hidden');
+          }
+
+          // message length validation
+          if (messageValue.length < 10) {
+            valid = false;
+            message.classList.add('border-red-500');
+            if (messageError) messageError.classList.remove('hidden');
+          }
+
+          if (!valid) {
+            event.preventDefault();
+          }
+        });
+      });
+    });
+  </script>
 </Default>
