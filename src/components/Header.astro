@@ -33,17 +33,32 @@ const nav = [
     <div class="flex items-center gap-3">
       {(() => {
         const other = lang === 'es' ? 'en' : 'es';
-        const path = (Astro.url?.pathname || '/').replace(/^\/(es|en)/, '');
-        const target = `/${other}${path}` || `/${other}`;
+        const current = Astro.url?.pathname || '/';
+
+        // normalizar la ruta actual quitando el prefijo /en cuando estamos en inglés
+        let rest = current;
+        if (lang === 'en' && rest.startsWith('/en')) {
+          rest = rest.slice(3) || '/'; // '/en' -> '/', '/en/projects' -> '/projects'
+        }
+
+        // prefijo para el idioma destino: español en raíz, inglés bajo /en
+        const prefix = other === 'es' ? '' : '/en';
+
+        // construir URL destino
+        const target = rest === '/' ? (prefix || '/') : `${prefix}${rest}`;
+
         return (
-          <a href={target} aria-label={lang === 'es' ? 'Cambiar a inglés' : 'Switch to Spanish'}
-             class="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-slate-100 text-slate-700"
-             title={lang === 'es' ? 'Cambiar idioma' : 'Change language'}>
+          <a
+            href={target}
+            aria-label={lang === 'es' ? 'Cambiar a inglés' : 'Switch to Spanish'}
+            class="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-slate-100 text-slate-700"
+            title={lang === 'es' ? 'Cambiar idioma' : 'Change language'}
+          >
             <Icon name="ri:translate" class="w-5 h-5" />
           </a>
         );
       })()}
-      <a href="/cv.pdf" download class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-xl transition">
+      <a href="/cv-Beslanga.pdf" download class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-xl transition">
         <Icon name="fa6-solid:download" class="w-4 h-4" />
         Resumen
       </a>
@@ -60,13 +75,12 @@ const nav = [
 </style>
 
 <script is:raw>
-  // Scroll suave nativo
+
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!prefersReduced) {
     document.documentElement.style.scrollBehavior = 'smooth';
   }
 
-  // Resaltar link activo con IntersectionObserver
   const sections = Array.from(document.querySelectorAll('section[data-spy="true"]'));
   const links = new Map(Array.from(document.querySelectorAll('.nav-link')).map(a => [a.dataset.section, a]));
 
@@ -76,7 +90,7 @@ const nav = [
       const link = links.get(id);
       if (!link) return;
       if (entry.isIntersecting) {
-        // quitar activos previos
+
         document.querySelectorAll('.nav-link[aria-current="true"]').forEach(el => el.setAttribute('aria-current', 'false'));
         link.setAttribute('aria-current', 'true');
       }
