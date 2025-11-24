@@ -1,0 +1,64 @@
+---
+import { actions } from "astro:actions";
+---
+<form
+  class="space-y-6"
+  method="POST"
+  id="contact-form"
+  action={actions.sendContactEmail}
+>
+  <div>
+    <label for="email" class="block text-sm font-medium text-slate-800 mb-1">
+      Email
+    </label>
+    <input
+      name="email"
+      type="email"
+      required
+      placeholder="tu.email@ejemplo.com"
+      class="w-full rounded-lg border border-slate-200 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+    />
+  </div>
+  <!-- Message -->
+  <div>
+    <label for="message" class="block text-sm font-medium text-slate-800 mb-1">
+      Mensaje
+    </label>
+    <textarea
+      id="message"
+      name="message"
+      required
+      rows="5"   
+      placeholder="Cuéntame brevemente en qué puedo ayudarte"
+      class="w-full rounded-lg border border-slate-200 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+    ></textarea>
+  </div>
+  <div class="flex justify-end">
+    <button
+      type="submit"
+      class="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+    >
+      Enviar
+    </button>
+  </div>
+</form>
+<script>
+  import { actions } from "astro:actions";
+  
+  const form = document.getElementById('contact-form') as HTMLFormElement
+
+  const handleSubmit = async (e: Event) => {
+    e.preventDefault()
+    const form = e.target as HTMLFormElement
+    const formData = new FormData(form)
+    const { data, error } = await actions.sendContactEmail(formData)
+
+    if (data) {
+      form.reset()
+    }
+  }
+
+  if (form && form instanceof HTMLFormElement) {
+    form.addEventListener('submit', (e) => handleSubmit(e))
+  }
+</script>

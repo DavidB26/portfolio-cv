@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "astro": "^5.14.8",
-    "astro-icon": "^1.1.5"
+    "astro-icon": "^1.1.5",
+    "resend": "^6.5.2"
   },
   "devDependencies": {
     "@iconify-json/fa6-solid": "^1.2.4",

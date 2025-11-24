@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 
@@ -18,6 +18,28 @@ export default defineConfig({
       },
     }),
   ],
+  env: {
+    schema: {
+      FROM_EMAIL: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: false,
+        default: 'INFORM_VALID_EMAIL'
+      }),
+      TO_EMAIL: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: false,
+        default: 'INFORM_VALID_EMAIL'
+      }),
+      RESEND_API_KEY: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: false,
+        default: 'INFORM_VALID_TOKEN'
+      })
+    }
+  },
   vite: {
     plugins: [tailwindcss()],
   },
