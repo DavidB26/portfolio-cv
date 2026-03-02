@@ -29,7 +29,7 @@ const nav = [
       ))}
     </nav>
 
-    <!-- Botón CV / idioma opcional -->
+    <!-- Language & CV -->
     <div class="flex items-center gap-3">
       {(() => {
         const other = lang === 'es' ? 'en' : 'es';
@@ -58,9 +58,15 @@ const nav = [
           </a>
         );
       })()}
-      <a href="/cv-Beslanga.pdf" download class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-xl transition">
+      <a
+        href="/cv-Beslanga.pdf"
+        download
+        aria-label={lang === 'es' ? 'Descargar CV' : 'Download resume'}
+        title={lang === 'es' ? 'Descargar CV' : 'Download resume'}
+        class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-xl transition"
+      >
         <Icon name="fa6-solid:download" class="w-4 h-4" />
-        Resumen
+        {lang === 'es' ? 'Resumen' : 'Resume'}
       </a>
     </div>
   </div>

@@ -1,16 +1,25 @@
 ---
 import { Icon } from "astro-icon/components";
+
+const { lang = 'es' } = Astro.props;
+
+const t = {
+  tagline: lang === 'en'
+    ? 'Front-End Web Developer · React · UX · SEO'
+    : 'Desarrollador Web Front End · React · UX · SEO',
+  location: lang === 'en' ? 'Lima, Peru' : 'Lima, Perú',
+};
 ---
 
 <section id="hero" class="max-w-5xl mx-auto px-4 py-14">
   <div class="text-center space-y-3">
     <img src="/avatar.webp" alt="David Beslanga" width="104" height="104" class="mx-auto rounded-full" />
     <h1 class="text-4xl md:text-5xl font-extrabold">David Beslanga</h1>
-    <p class="text-lg text-gray-600">Desarrollador Web Front End · React · UX · SEO</p>
+    <p class="text-lg text-gray-600">{t.tagline}</p>
     <div class="flex flex-wrap items-center justify-center gap-4 text-sm text-gray-600 mt-2">
       <div class="flex items-center gap-1">
         <Icon name="mdi:map-marker" class="w-4 h-4" />
-        <span>Lima, Perú</span>
+        <span>{t.location}</span>
       </div>
       <a href="mailto:contact@davidbeslanga.com" class="flex items-center gap-1 hover:text-blue-700 transition-colors">
         <Icon name="mdi:email-outline" class="w-4 h-4" />

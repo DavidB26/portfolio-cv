@@ -1,5 +1,14 @@
 ---
 import { actions } from "astro:actions";
+
+const { lang = 'es' } = Astro.props;
+const t = {
+  emailLabel: 'Email',
+  emailPlaceholder: lang === 'en' ? 'your.email@example.com' : 'tu.email@ejemplo.com',
+  messageLabel: lang === 'en' ? 'Message' : 'Mensaje',
+  messagePlaceholder: lang === 'en' ? 'Tell me briefly how I can help you' : 'Cuéntame brevemente en qué puedo ayudarte',
+  send: lang === 'en' ? 'Send' : 'Enviar',
+};
 ---
 <form
   class="space-y-6"
@@ -9,27 +18,27 @@ import { actions } from "astro:actions";
 >
   <div>
     <label for="email" class="block text-sm font-medium text-slate-800 mb-1">
-      Email
+      {t.emailLabel}
     </label>
     <input
       name="email"
       type="email"
       required
-      placeholder="tu.email@ejemplo.com"
+      placeholder={t.emailPlaceholder}
       class="w-full rounded-lg border border-slate-200 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
     />
   </div>
   <!-- Message -->
   <div>
     <label for="message" class="block text-sm font-medium text-slate-800 mb-1">
-      Mensaje
+      {t.messageLabel}
     </label>
     <textarea
       id="message"
       name="message"
       required
       rows="5"   
-      placeholder="Cuéntame brevemente en qué puedo ayudarte"
+      placeholder={t.messagePlaceholder}
       class="w-full rounded-lg border border-slate-200 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
     ></textarea>
   </div>
@@ -38,7 +47,7 @@ import { actions } from "astro:actions";
       type="submit"
       class="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
     >
-      Enviar
+      {t.send}
     </button>
   </div>
 </form>

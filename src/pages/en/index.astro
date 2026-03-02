@@ -1,176 +1,67 @@
 ---
-import Default from '../../layouts/Default.astro';
-import { Icon } from 'astro-icon/components';
+import Contact from '../../sections/Contact.astro';
+import Hero from '../../components/Hero.astro';
+import About from '../../components/About.astro';
+import Experience from '../../components/Experience.astro';
+import Skills from '../../components/Skills.astro';
+import Projects from '../../components/Projects.astro';
+import Layout from '../../layouts/Layout.astro';
 ---
 
-<Default lang="en" title="David Beslanga – Frontend Developer">
-  <!-- HERO -->
-  <section id="hero" class="max-w-5xl mx-auto px-4 py-14">
-    <div class="text-center space-y-3">
-      <img src="/avatar.webp" alt="David Beslanga" width="104" height="104" class="mx-auto rounded-full" />
-      <h1 class="text-4xl md:text-5xl font-extrabold">David Beslanga</h1>
-      <p class="text-lg text-gray-600">Front-End Web Developer · React · UX · SEO</p>
-      <div class="flex flex-wrap items-center justify-center gap-4 text-sm text-gray-600 mt-2">
-        <div class="flex items-center gap-1">
-          <Icon name="mdi:map-marker" class="w-4 h-4" />
-          <span>Lima, Peru</span>
-        </div>
-        <a href="mailto:contact@davidbeslanga.com" class="flex items-center gap-1 hover:text-blue-700 transition-colors">
-          <Icon name="mdi:email-outline" class="w-4 h-4" />
-          <span>contact@davidbeslanga.com</span>
-        </a>
-        <a href="https://www.linkedin.com/in/david-beslanga/" class="flex items-center gap-1 hover:text-blue-700 transition-colors">
-          <Icon name="mdi:linkedin" class="w-4 h-4" />
-          <span>linkedin.com/in/david-beslanga/</span>
-        </a>
-        <a href="https://github.com/DavidB26" class="flex items-center gap-1 hover:text-blue-700 transition-colors">
-          <Icon name="mdi:github" class="w-4 h-4" />
-          <span>github.com/DavidB26</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" data-spy="true" class="max-w-5xl mx-auto px-4 py-16 bg-white rounded-2xl shadow-sm">
-    <h2 class="text-2xl font-semibold mb-3">About me</h2>
-    <p class="leading-7 text-gray-700">
-      Front-End Web Developer with more than 7 years of experience creating optimized, attractive and highly functional digital experiences. 
-      I combine intuitive design, performance optimization and efficient development, ensuring interfaces that not only look good, but also improve 
-      conversion and overall user experience.
-    </p>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section id="experience" data-spy="true" class="max-w-5xl mx-auto px-4 py-16">
-    <h2 class="text-2xl font-semibold mb-6">Experience</h2>
-
-    <div class="space-y-8">
-      <!-- Experience 1 -->
-      <a href="#rol-verisure" class="group block">
-        <div class="bg-white rounded-2xl shadow-sm group-hover:shadow-md group-hover:scale-[1.01] transition-all duration-300 p-6 flex flex-col sm:flex-row items-start gap-6">
-          <img src="/logos/bluelight.webp" alt="Blue Light Consulting" class="w-16 h-16 rounded-lg object-contain" />
-          <div>
-            <h3 class="font-semibold text-lg">Front-End Developer</h3>
-            <p class="text-gray-500 mb-3">May 2023 – Present</p>
-            <p class="text-gray-700 leading-relaxed">
-              I led the technical optimization of Verisure’s landing pages, reducing loading times from 7s to under 3s 
-              using advanced lazy loading, asset minification, image optimization and code refactoring techniques. 
-              I redesigned interaction flows and component architecture to improve performance, accessibility (WCAG 2.1) 
-              and conversion (CRO). I also developed the Security Observatory in WordPress, integrating dynamic data and 
-              ensuring a smooth experience with an SEO-friendly structure. Additionally, I implemented the redesign of the 
-              corporate blog in Drupal, prioritizing scalability, maintainability and an interface optimized for UX / UI.
-            </p>
-          </div>
-        </div>
-      </a>
-
-      <!-- Experience 2 -->
-      <a href="#rol-tottus" class="group block">
-        <div class="bg-white rounded-2xl shadow-sm group-hover:shadow-md group-hover:scale-[1.01] transition-all duration-300 p-6 flex flex-col sm:flex-row items-start gap-6">
-          <img src="/logos/aertec.webp" alt="Aertec" class="w-16 h-16 rounded-lg object-contain" />
-          <div>
-            <h3 class="font-semibold text-lg">Front-End Developer</h3>
-            <p class="text-gray-500 mb-3">September 2021 – January 2024</p>
-            <p class="text-gray-700 leading-relaxed">
-              I designed and developed modular landing pages for offers and campaign promotions at Tottus Chile, 
-              optimizing the front-end architecture to maximize visibility and conversion. I applied UI/UX, performance 
-              and HTML semantics best practices to improve user interaction and site efficiency. I integrated tools such as 
-              Firebase, Contentful and ContentStack for dynamic content management, and used jQuery and Bootstrap to build 
-              responsive, reusable and high-performance interfaces. These changes helped increase conversion rates and reduce 
-              friction in the navigation flow.
-            </p>
-          </div>
-        </div>
-      </a>
-
-      <!-- Experience 3 -->
-      <a href="#rol-centrum" class="group block">
-        <div class="bg-white rounded-2xl shadow-sm group-hover:shadow-md group-hover:scale-[1.01] transition-all duration-300 p-6 flex flex-col sm:flex-row items-start gap-6">
-          <img src="/logos/aertec.webp" alt="Aertec" class="w-16 h-16 rounded-lg object-contain" />
-          <div>
-            <h3 class="font-semibold text-lg">Web Developer</h3>
-            <p class="text-gray-500 mb-3">April 2020 – September 2021</p>
-            <p class="text-gray-700 leading-relaxed">
-              I developed and optimized custom landing pages in Eloqua, integrating marketing automation and advanced 
-              analytics for lead tracking. I implemented scalable structures using Bootstrap, HTML5 and CSS3 with a strong focus on 
-              performance and responsive design. I also collaborated in adapting visual assets using Photoshop and Figma, 
-              ensuring brand consistency and an experience aligned with accessibility and conversion standards. 
-              This work helped strengthen Centrum PUCP’s digital presence and optimize their acquisition funnel.
-            </p>
-          </div>
-        </div>
-      </a>
-
-      <!-- Experience 4 -->
-      <a href="#rol-electo" class="group block">
-        <div class="bg-white rounded-2xl shadow-sm group-hover:shadow-md group-hover:scale-[1.01] transition-all duration-300 p-6 flex flex-col sm:flex-row items-start gap-6">
-          <img src="/logos/aertec.webp" alt="Aertec" class="w-16 h-16 rounded-lg object-contain" />
-          <div>
-            <h3 class="font-semibold text-lg">Web Developer</h3>
-            <p class="text-gray-500 mb-3">April 2018 – April 2020</p>
-            <p class="text-gray-700 leading-relaxed">
-              I developed and optimized email marketing campaigns at Electo, implementing new HTML/CSS coding methodologies 
-              that improved compatibility across multiple email clients. I built websites using Visual Studio, Fireworks and Photoshop, 
-              ensuring efficient structures aligned with W3C standards. I also developed blogs and sites in Laravel and WordPress 
-              with a strong focus on UX/UI, SEO and performance. I managed deployments with FileZilla, ensuring functional, scalable 
-              and high-performance websites.
-            </p>
-          </div>
-        </div>
-      </a>
-    </div>
-  </section>
+<Layout lang="en" title="David Beslanga – Frontend Developer">
+  <Hero lang="en" />
+  <About lang="en" />
+  <Experience lang="en" />
 
   <!-- EXTENDED ROLES -->
   <section id="roles" class="max-w-5xl mx-auto px-4 py-16 space-y-10">
-    <h2 class="text-2xl font-semibold mb-6">Experience details</h2>
+    <h2 class="text-2xl font-semibold mb-6">Experience Details</h2>
 
     <!-- Verisure -->
     <article id="rol-verisure" class="bg-white rounded-2xl shadow-sm p-8">
-      <h3 class="text-xl font-bold mb-2">Front-End Developer – Verisure </h3>
+      <h3 class="text-xl font-bold mb-2">Front-End Developer – Verisure</h3>
       <p class="text-gray-500 mb-3">May 2023 – Present</p>
       <p class="text-gray-700 mb-4">
-        I led the technical and visual optimization of Verisure’s landing pages for Peru and Latam, focusing on performance, accessibility and conversion.
+        Led the technical and visual optimization of Verisure Perú & LatAm landing pages, focusing on performance, accessibility, and conversion.
       </p>
       <ul class="list-disc pl-6 text-gray-700 space-y-2">
-        <li>Reduced loading times from 7s to under 3s using lazy loading, asset minification, image optimization and code refactoring.</li>
-        <li>Redesigned component architecture and interaction flows, improving accessibility (WCAG 2.1) and conversion (CRO).</li>
-        <li>Developed the Security Observatory in WordPress, integrating dynamic data, SEO structure and a smooth experience.</li>
-        <li>Implemented the redesign of the corporate blog in Drupal, prioritizing scalability, maintainability and UX/UI.</li>
-        <li>Worked closely with design, SEO and marketing teams to align business goals with digital experience.</li>
+        <li>Reduced load times from ~7s to under 3s through lazy loading, asset minification, image optimization, and code refactoring.</li>
+        <li>Redesigned component architecture and interaction flows, improving accessibility (WCAG 2.1) and conversion rate (CRO).</li>
+        <li>Built the Security Observatory website in WordPress, integrating dynamic data, SEO structure, and a smooth reading experience.</li>
+        <li>Implemented the corporate blog redesign in Drupal, prioritizing scalability, maintainability, and UX/UI quality.</li>
+        <li>Worked closely with Design, SEO, and Marketing teams to align business goals with the digital experience.</li>
       </ul>
     </article>
 
     <!-- Tottus -->
     <article id="rol-tottus" class="bg-white rounded-2xl shadow-sm p-8">
-      <h3 class="text-xl font-bold mb-2">Front-End Developer – Tottus Chile </h3>
+      <h3 class="text-xl font-bold mb-2">Front-End Developer – Tottus Chile</h3>
       <p class="text-gray-500 mb-3">September 2021 – January 2024</p>
       <p class="text-gray-700 mb-4">
-        Specialist in the development and optimization of landing pages for offers and promotional campaigns at Tottus Chile.
+        Specialized in building and optimizing campaign landing pages for Tottus Chile promotions and offers.
       </p>
       <ul class="list-disc pl-6 text-gray-700 space-y-2">
-        <li>Designed and developed modular landing pages focused on visibility, speed and conversion.</li>
+        <li>Designed and developed modular landing pages focused on visibility, speed, and conversion.</li>
         <li>Implemented efficient front-end architecture and semantic HTML5 to improve SEO and accessibility.</li>
-        <li>Integrated dynamic content management systems (Firebase, Contentful, ContentStack).</li>
-        <li>Used jQuery and Bootstrap to build responsive, reusable components and interfaces.</li>
-        <li>Improved conversion rates and reduced friction in the user journey.</li>
+        <li>Integrated dynamic content platforms (Firebase, Contentful, ContentStack).</li>
+        <li>Built responsive interfaces with jQuery and Bootstrap using reusable components.</li>
+        <li>Improved conversion performance and reduced friction across key user flows.</li>
       </ul>
     </article>
 
     <!-- Centrum -->
     <article id="rol-centrum" class="bg-white rounded-2xl shadow-sm p-8">
-      <h3 class="text-xl font-bold mb-2">Web Developer – Centrum PUCP </h3>
+      <h3 class="text-xl font-bold mb-2">Web Developer – Centrum PUCP</h3>
       <p class="text-gray-500 mb-3">April 2020 – September 2021</p>
       <p class="text-gray-700 mb-4">
-        Development of custom landing pages and marketing automation integration for Centrum PUCP.
+        Developed custom landing pages and integrated marketing automation for Centrum PUCP.
       </p>
       <ul class="list-disc pl-6 text-gray-700 space-y-2">
-        <li>Developed and optimized custom landings in Eloqua, integrating marketing automation and advanced analytics.</li>
-        <li>Built scalable structures with Bootstrap, HTML5 and CSS3, prioritizing performance and responsive design.</li>
-        <li>Collaborated on visual adaptation of assets using Photoshop and Figma.</li>
-        <li>Ensured brand consistency, accessibility and conversion across all pieces.</li>
-        <li>Helped optimize the acquisition funnel and strengthen the brand’s digital presence.</li>
+        <li>Built and optimized custom landings in Eloqua, integrating marketing automation and advanced analytics.</li>
+        <li>Created scalable layouts with Bootstrap, HTML5, and CSS3, prioritizing performance and responsive design.</li>
+        <li>Collaborated on visual adaptations using Photoshop and Figma.</li>
+        <li>Ensured brand consistency, accessibility, and conversion best practices.</li>
+        <li>Optimized acquisition funnels and strengthened the brand’s digital presence.</li>
       </ul>
     </article>
 
@@ -179,251 +70,23 @@ import { Icon } from 'astro-icon/components';
       <h3 class="text-xl font-bold mb-2">Web Developer – Electo</h3>
       <p class="text-gray-500 mb-3">April 2018 – April 2020</p>
       <p class="text-gray-700 mb-4">
-        Development of email marketing campaigns, websites and blogs for Electo’s clients, prioritizing compatibility, UX and SEO.
+        Delivered email marketing campaigns, websites, and blogs for Electo clients, prioritizing compatibility, UX, and SEO.
       </p>
       <ul class="list-disc pl-6 text-gray-700 space-y-2">
-        <li>Implemented new HTML/CSS coding methodologies for emails, improving cross-client compatibility.</li>
-        <li>Built websites with Visual Studio, Fireworks and Photoshop, following W3C standards.</li>
-        <li>Developed blogs and sites in Laravel and WordPress with a strong focus on UX/UI, SEO and performance.</li>
-        <li>Managed deployments with FileZilla, ensuring performance and scalability.</li>
+        <li>Implemented improved HTML/CSS email layout methodologies, increasing cross-client compatibility.</li>
+        <li>Built websites using Visual Studio, Fireworks, and Photoshop, following W3C standards.</li>
+        <li>Developed blogs and sites in Laravel and WordPress with a focus on UX/UI, SEO, and performance.</li>
+        <li>Managed deployments with FileZilla and ensured performance and scalability.</li>
         <li>Collaborated with multidisciplinary teams on digital communication projects.</li>
       </ul>
     </article>
   </section>
 
-  <!-- SKILLS -->
-  <section
-    id="skills"
-    data-spy="true"
-    class="max-w-5xl mx-auto px-4 py-16 bg-white rounded-2xl shadow-sm"
-  >
-    <h2 class="text-2xl font-semibold mb-6">Skills</h2>
-
-    <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
-      <!-- React -->
-      <div
-        class="bg-[#E8F0FB] rounded-2xl p-6 flex flex-col items-center justify-between text-center shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300"
-      >
-        <div
-          class="flex items-center justify-center w-16 h-16 rounded-xl bg-white border border-slate-200"
-        >
-          <Icon name="logos:react" class="w-10 h-10" />
-        </div>
-        <p class="mt-4 font-semibold text-slate-900">React.js</p>
-      </div>
-
-      <!-- Node.js -->
-      <div
-        class="bg-[#E8F0FB] rounded-2xl p-6 flex flex-col items-center justify-between text-center shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300"
-      >
-        <div
-          class="flex items-center justify-center w-16 h-16 rounded-xl bg-white border border-slate-200"
-        >
-          <Icon name="logos:nodejs-icon" class="w-10 h-10" />
-        </div>
-        <p class="mt-4 font-semibold text-slate-900">Node.js</p>
-      </div>
-
-      <!-- Next.js -->
-      <div
-        class="bg-[#E8F0FB] rounded-2xl p-6 flex flex-col items-center justify-between text-center shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300"
-      >
-        <div
-          class="flex items-center justify-center w-16 h-16 rounded-xl bg-white border border-slate-200"
-        >
-          <Icon name="logos:nextjs-icon" class="w-10 h-10" />
-        </div>
-        <p class="mt-4 font-semibold text-slate-900">Next.js</p>
-      </div>
-
-      <!-- WordPress -->
-      <div
-        class="bg-[#E8F0FB] rounded-2xl p-6 flex flex-col items-center justify-between text-center shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300"
-      >
-        <div
-          class="flex items-center justify-center w-16 h-16 rounded-xl bg-white border border-slate-200"
-        >
-          <Icon name="logos:wordpress-icon" class="w-10 h-10" />
-        </div>
-        <p class="mt-4 font-semibold text-slate-900">WordPress</p>
-      </div>
-
-      <!-- Figma -->
-      <div
-        class="bg-[#E8F0FB] rounded-2xl p-6 flex flex-col items-center justify-between text-center shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300"
-      >
-        <div
-          class="flex items-center justify-center w-16 h-16 rounded-xl bg-white border border-slate-200"
-        >
-          <Icon name="logos:figma" class="w-10 h-10" />
-        </div>
-        <p class="mt-4 font-semibold text-slate-900">Figma</p>
-      </div>
-
-      <!-- GitHub -->
-      <div
-        class="bg-[#E8F0FB] rounded-2xl p-6 flex flex-col items-center justify-between text-center shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300"
-      >
-        <div
-          class="flex items-center justify-center w-16 h-16 rounded-full bg-white border border-slate-200"
-        >
-          <Icon name="logos:github-icon" class="w-10 h-10" />
-        </div>
-        <p class="mt-4 font-semibold text-slate-900">GitHub</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects" data-spy="true" class="max-w-5xl mx-auto px-4 py-16">
-    <h2 class="text-2xl font-semibold mb-6">Projects</h2>
-
-    <div class="space-y-10">
-      <!-- Project 1 -->
-      <div
-        class="bg-white rounded-2xl shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300 p-6 flex flex-col md:flex-row items-center gap-8"
-      >
-        <div class="flex-1">
-          <p class="text-blue-700 font-semibold mb-1">Curriculum Vitae Project</p>
-          <h3 class="text-xl font-bold mb-3">CV Presentation</h3>
-          <p class="text-gray-700 leading-relaxed mb-4">
-            I built a personal website to present my professional experience in detail, including 
-            a downloadable version of my CV. Developed with <strong>Astro</strong>, 
-            <strong>Tailwind CSS</strong> and <strong>TypeScript</strong>, prioritizing SEO, performance 
-            and a fully responsive design.
-          </p>
-          <a
-            href="https://davidbeslanga.com"
-            target="_blank"
-            class="inline-flex items-center gap-2 bg-blue-700 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-800 transition-colors"
-          >
-            View project
-            <Icon name="mdi:arrow-right" class="w-4 h-4" />
-          </a>
-        </div>
-        <img
-          src="/projects/cv-preview.webp"
-          alt="CV presentation preview"
-          class="w-full md:w-1/2 rounded-xl shadow-sm object-cover"
-        />
-      </div>
-
-      <!-- Project 2 -->
-      <div
-        class="bg-white rounded-2xl shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300 p-6 flex flex-col md:flex-row-reverse items-center gap-8"
-      >
-        <div class="flex-1">
-          <p class="text-blue-700 font-semibold mb-1">Personal Project</p>
-          <h3 class="text-xl font-bold mb-3">Full-Stack Project</h3>
-          <p class="text-gray-700 leading-relaxed mb-4">
-            I developed a full-stack web application with <strong>Next.js</strong>, 
-            <strong>Node.js</strong> and <strong>MongoDB</strong>, integrating authentication and an 
-            admin panel. I implemented a REST architecture and a modern UI with reusable components 
-            and a strong performance focus.
-          </p>
-          <a
-            href="https://davidbeslanga.com"
-            target="_blank"
-            class="inline-flex items-center gap-2 bg-blue-700 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-800 transition-colors"
-          >
-            View project
-            <Icon name="mdi:arrow-right" class="w-4 h-4" />
-          </a>
-        </div>
-        <img
-          src="/projects/fullstack-preview.webp"
-          alt="Full stack project preview"
-          class="w-full md:w-1/2 rounded-xl shadow-sm object-cover"
-        />
-      </div>
-
-      <!-- Project 3 -->
-      <div
-        class="bg-white rounded-2xl shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300 p-6 flex flex-col md:flex-row items-center gap-8"
-      >
-        <div class="flex-1">
-          <p class="text-blue-700 font-semibold mb-1">Corporate Project</p>
-          <h3 class="text-xl font-bold mb-3">Verisure Landing Optimization</h3>
-          <p class="text-gray-700 leading-relaxed mb-4">
-            I refactored and optimized landing pages for <strong>Verisure Peru</strong> and 
-            <strong>Latam</strong>, reducing loading times and improving Core Web Vitals. 
-            I implemented <strong>lazy loading</strong>, <strong>SEO optimizations</strong> and 
-            <strong>JSON-LD structured data</strong>.
-          </p>
-          <a
-            href="https://davidbeslanga.com"
-            target="_blank"
-            class="inline-flex items-center gap-2 bg-blue-700 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-800 transition-colors"
-          >
-            View project
-            <Icon name="mdi:arrow-right" class="w-4 h-4" />
-          </a>
-        </div>
-        <img
-          src="/projects/verisure-preview.webp"
-          alt="Verisure project preview"
-          class="w-full md:w-1/2 rounded-xl shadow-sm object-cover"
-        />
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" data-spy="true" class="max-w-5xl mx-auto px-4 py-16 bg-white rounded-2xl shadow-sm">
-    <h2 class="text-2xl font-semibold mb-6">Contact</h2>
-    <form
-      class="space-y-6"
-      action="https://formsubmit.co/contact@davidbeslanga.com"
-      method="POST"
-    >
-      <!-- Email -->
-      <div>
-        <label for="email" class="block text-sm font-medium text-slate-800 mb-1">
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          placeholder="your.email@example.com"
-          class="w-full rounded-lg border border-slate-200 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-        />
-      </div>
-
-      <!-- Message -->
-      <div>
-        <label for="message" class="block text-sm font-medium text-slate-800 mb-1">
-          Message
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          required
-          rows="5"
-          placeholder="Tell me briefly how I can help you"
-          class="w-full rounded-lg border border-slate-200 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-        ></textarea>
-      </div>
-
-      <!-- Hidden fields for FormSubmit -->
-      <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_subject" value="New message from portfolio" />
-      <input type="hidden" name="_template" value="table" />
-
-      <!-- Actions -->
-      <div class="flex justify-end">
-        <button
-          type="submit"
-          class="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-        >
-          Send
-        </button>
-      </div>
-    </form>
-  </section>
-
+  <Skills lang="en" />
+  <Projects lang="en" />
+  <Contact lang="en" />
   <footer class="py-10 text-center text-sm text-gray-500">© {new Date().getFullYear()} David Beslanga</footer>
+
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
       const forms = document.querySelectorAll('form[data-contact]');
@@ -467,4 +130,4 @@ import { Icon } from 'astro-icon/components';
       });
     });
   </script>
-</Default>
+</Layout>

@@ -1,59 +1,72 @@
+---
+const { lang = 'es' } = Astro.props;
+
+const t = {
+  title: lang === 'en' ? 'Experience' : 'Experiencia',
+  items: [
+    {
+      href: '#rol-verisure',
+      logo: '/logos/logo-verisure.webp',
+      logoAlt: 'Verisure',
+      role: lang === 'en' ? 'Front-End Developer' : 'Programador Front-End',
+      date: lang === 'en' ? 'May 2023 – Present' : 'Mayo 2023 – Actualidad',
+      desc:
+        lang === 'en'
+          ? 'Led the technical optimization of Verisure landing pages, reducing load times from ~7s to under 3s through advanced lazy loading, asset minification, image optimization and code refactoring. Redesigned interaction flows and component architecture to improve performance, accessibility (WCAG 2.1) and conversion (CRO). Built the Security Observatory in WordPress with dynamic data and an SEO-friendly structure. Implemented a corporate blog redesign in Drupal, prioritizing scalability, maintainability and a UX/UI-optimized interface.'
+          : 'Lideré la optimización técnica de las landing pages de Verisure, reduciendo los tiempos de carga de 7 s a menos de 3 s mediante técnicas avanzadas de Lazy Loading, minificación de assets, optimización de imágenes y refactorización de código. Rediseñé los flujos de interacción y la arquitectura de componentes para mejorar el rendimiento, la accesibilidad (WCAG 2.1) y la conversión (CRO). Además, desarrollé el Observatorio de Seguridad en WordPress, integrando datos dinámicos y asegurando una experiencia fluida con una estructura SEO-friendly. Finalmente, implementé el rediseño del blog corporativo en Drupal, priorizando escalabilidad, mantenibilidad y una interfaz optimizada para UX / UI.',
+    },
+    {
+      href: '#rol-tottus',
+      logo: '/logos/logo-tottus.webp',
+      logoAlt: 'Tottus',
+      role: lang === 'en' ? 'Front-End Developer' : 'Desarrollador de Front-End',
+      date: lang === 'en' ? 'September 2021 – January 2024' : 'Setiembre 2021 – Enero 2024',
+      desc:
+        lang === 'en'
+          ? 'Designed and developed modular landing pages for promotions and campaigns at Tottus Chile, optimizing the front-end architecture to maximize visibility and conversion. Applied UI/UX principles, performance best practices and semantic HTML to improve user interaction and site efficiency. Integrated Firebase, Contentful and ContentStack for dynamic content management, and used jQuery and Bootstrap to build responsive, reusable, high-performance interfaces. These improvements helped increase conversion rate and reduce friction across key navigation flows.'
+          : 'Diseñé y desarrollé landing pages modulares para campañas de ofertas y promociones de Tottus Chile, optimizando la arquitectura del front-end para maximizar visibilidad y conversión. Apliqué principios de UI/UX, performance y semántica HTML para mejorar la interacción del usuario y la eficiencia del sitio. Integré herramientas como Firebase, Contentful y ContentStack para gestión de contenido dinámica, además de frameworks como jQuery y Bootstrap para construir interfaces responsivas, reutilizables y con alto rendimiento. Los cambios implementados permitieron mejorar la tasa de conversión y reducir la fricción en el flujo de navegación.',
+    },
+    {
+      href: '#rol-centrum',
+      logo: '/logos/logo-centrum.webp',
+      logoAlt: 'Centrum PUCP',
+      role: lang === 'en' ? 'Web Developer' : 'Programador Web',
+      date: lang === 'en' ? 'April 2020 – September 2021' : 'Abril 2020 – Setiembre 2021',
+      desc:
+        lang === 'en'
+          ? 'Developed and optimized custom landing pages in Eloqua, integrating marketing automation and advanced analytics for lead tracking. Implemented scalable structures with Bootstrap, HTML5 and CSS3, focused on performance and responsive design. Collaborated on visual asset adaptation using Photoshop and Figma, ensuring brand consistency and an experience aligned with accessibility and conversion standards. This work strengthened Centrum PUCP’s digital presence and optimized acquisition funnels.'
+          : 'Desarrollé y optimicé landing pages personalizadas en Eloqua, integrando automatización de marketing y analítica avanzada para el seguimiento de leads. Implementé estructuras escalables con Bootstrap, HTML5 y CSS3, enfocadas en performance y diseño responsive. Además, colaboré en la adaptación visual de las piezas gráficas mediante Photoshop y Figma, asegurando consistencia de marca y una experiencia alineada con los estándares de accesibilidad y conversión. Este trabajo contribuyó a fortalecer la presencia digital de Centrum PUCP y a optimizar el funnel de captación.',
+    },
+    {
+      href: '#rol-electo',
+      logo: '/logos/logo-electo.webp',
+      logoAlt: 'Electo',
+      role: lang === 'en' ? 'Web Developer' : 'Programador Web',
+      date: lang === 'en' ? 'April 2018 – April 2020' : 'Abril 2018 – Abril 2020',
+      desc:
+        lang === 'en'
+          ? 'Developed and optimized email marketing campaigns at Electo, implementing HTML/CSS layout methodologies that improved cross-client compatibility. Built websites using Visual Studio, Fireworks and Photoshop, ensuring efficient structures aligned with W3C standards. Developed blogs and sites in Laravel and WordPress with a focus on UX/UI, SEO and performance. Managed deployments with FileZilla, delivering functional, scalable, high-performance websites.'
+          : 'Desarrollé y optimicé campañas de email marketing en Electo, implementando nuevas metodologías de maquetación en HTML/CSS que mejoraron la compatibilidad con distintos servidores. Maqueté sitios web con Visual Studio, Fireworks y Photoshop, asegurando estructuras eficientes y alineadas con los estándares W3C. Además, desarrollé blogs y sitios en Laravel y WordPress con enfoque UX/UI, SEO y rendimiento. Gestioné despliegues con FileZilla, garantizando sitios funcionales, escalables y de alta performance.',
+    },
+  ],
+};
+---
+
 <section id="experience" data-spy="true" class="max-w-5xl mx-auto px-4 py-16">
-  <h2 class="text-2xl font-semibold mb-6">Experiencia</h2>
+  <h2 class="text-2xl font-semibold mb-6">{t.title}</h2>
 
   <div class="space-y-8">
-    <!-- Experience 1 -->
-    <a href="#rol-verisure" class="group block">
-      <div class="bg-white rounded-2xl shadow-sm group-hover:shadow-md group-hover:scale-[1.01] transition-all duration-300 p-6 flex flex-col sm:flex-row items-start gap-6">
-        <img src="/logos/bluelight.webp" alt="Blue Light Consulting" class="w-16 h-16 rounded-lg object-contain" />
-        <div>
-          <h3 class="font-semibold text-lg">Programador Front-End</h3>
-          <p class="text-gray-500 mb-3">Mayo 2023 – Actualidad</p>
-          <p class="text-gray-700 leading-relaxed">
-            Lideré la optimización técnica de las landing pages de Verisure, reduciendo los tiempos de carga de 7 s a menos de 3 s mediante técnicas avanzadas de Lazy Loading, minificación de assets, optimización de imágenes y refactorización de código. Rediseñé los flujos de interacción y la arquitectura de componentes para mejorar el rendimiento, la accesibilidad (WCAG 2.1) y la conversión (CRO). Además, desarrollé el Observatorio de Seguridad en WordPress, integrando datos dinámicos y asegurando una experiencia fluida con una estructura SEO-friendly. Finalmente, implementé el rediseño del blog corporativo en Drupal, priorizando escalabilidad, mantenibilidad y una interfaz optimizada para UX / UI.
-          </p>
+    {t.items.map((item) => (
+      <a href={item.href} class="group block">
+        <div class="bg-white rounded-2xl shadow-sm group-hover:shadow-md group-hover:scale-[1.01] transition-all duration-300 p-6 flex flex-col sm:flex-row items-start gap-6">
+          <img src={item.logo} alt={item.logoAlt} class="w-16 h-16 rounded-lg object-contain" />
+          <div>
+            <h3 class="font-semibold text-lg">{item.role}</h3>
+            <p class="text-gray-500 mb-3">{item.date}</p>
+            <p class="text-gray-700 leading-relaxed">{item.desc}</p>
+          </div>
         </div>
-      </div>
-    </a>
-
-    <!-- Experience 2 -->
-    <a href="#rol-tottus" class="group block">
-      <div class="bg-white rounded-2xl shadow-sm group-hover:shadow-md group-hover:scale-[1.01] transition-all duration-300 p-6 flex flex-col sm:flex-row items-start gap-6">
-        <img src="/logos/aertec.webp" alt="Aertec" class="w-16 h-16 rounded-lg object-contain" />
-        <div>
-          <h3 class="font-semibold text-lg">Desarrollador de Front-End</h3>
-          <p class="text-gray-500 mb-3">Setiembre 2021 – Enero 2024</p>
-          <p class="text-gray-700 leading-relaxed">
-            Diseñé y desarrollé landing pages modulares para campañas de ofertas y promociones de Tottus Chile, optimizando la arquitectura del front-end para maximizar visibilidad y conversión. Apliqué principios de UI/UX, performance y semántica HTML para mejorar la interacción del usuario y la eficiencia del sitio. Integré herramientas como Firebase, Contentful y ContentStack para gestión de contenido dinámica, además de frameworks como jQuery y Bootstrap para construir interfaces responsivas, reutilizables y con alto rendimiento. Los cambios implementados permitieron mejorar la tasa de conversión y reducir la fricción en el flujo de navegación.
-          </p>
-        </div>
-      </div>
-    </a>
-    <!-- Experience 3 -->
-    <a href="#rol-centrum" class="group block">
-      <div class="bg-white rounded-2xl shadow-sm group-hover:shadow-md group-hover:scale-[1.01] transition-all duration-300 p-6 flex flex-col sm:flex-row items-start gap-6">
-        <img src="/logos/aertec.webp" alt="Aertec" class="w-16 h-16 rounded-lg object-contain" />
-        <div>
-          <h3 class="font-semibold text-lg">Programador Web</h3>
-          <p class="text-gray-500 mb-3">Abril 2020 – Setiembre 2021</p>
-          <p class="text-gray-700 leading-relaxed">
-            Desarrollé y optimicé landing pages personalizadas en Eloqua, integrando automatización de marketing y analítica avanzada para el seguimiento de leads. Implementé estructuras escalables con Bootstrap, HTML5 y CSS3, enfocadas en performance y diseño responsive. Además, colaboré en la adaptación visual de las piezas gráficas mediante Photoshop y Figma, asegurando consistencia de marca y una experiencia alineada con los estándares de accesibilidad y conversión. Este trabajo contribuyó a fortalecer la presencia digital de Centrum PUCP y a optimizar el funnel de captación.
-          </p>
-        </div>
-      </div>
-    </a>
-    <!-- Experience 4 -->
-    <a href="#rol-electo" class="group block">
-      <div class="bg-white rounded-2xl shadow-sm group-hover:shadow-md group-hover:scale-[1.01] transition-all duration-300 p-6 flex flex-col sm:flex-row items-start gap-6">
-        <img src="/logos/aertec.webp" alt="Aertec" class="w-16 h-16 rounded-lg object-contain" />
-        <div>
-          <h3 class="font-semibold text-lg">Programador Web</h3>
-          <p class="text-gray-500 mb-3">Abril 2018 – Abril 2020</p>
-          <p class="text-gray-700 leading-relaxed">
-            Desarrollé y optimicé campañas de email marketing en Electo, implementando nuevas metodologías de maquetación en HTML/CSS que mejoraron la compatibilidad con distintos servidores. Maqueté sitios web con Visual Studio, Fireworks y Photoshop, asegurando estructuras eficientes y alineadas con los estándares W3C. Además, desarrollé blogs y sitios en Laravel y WordPress con enfoque UX/UI, SEO y rendimiento. Gestioné despliegues con FileZilla, garantizando sitios funcionales, escalables y de alta performance.
-          </p>
-        </div>
-      </div>
-    </a>
+      </a>
+    ))}
   </div>
 </section>

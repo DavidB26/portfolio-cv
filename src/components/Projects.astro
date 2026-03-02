@@ -1,9 +1,46 @@
 ---
 import { Icon } from "astro-icon/components";
+
+const { lang = 'es' } = Astro.props;
+
+const t = {
+  title: lang === 'en' ? 'Projects' : 'Proyectos',
+  cta: lang === 'en' ? 'View project' : 'Ver proyecto',
+
+  p1_sub: lang === 'en' ? 'Curriculum Vitae Project' : 'Curriculum Vitae Project',
+  p1_title: lang === 'en' ? 'CV Presentation' : 'CV Presentation',
+  p1_desc: lang === 'en'
+    ? 'I built a personal website to present my professional profile with a clean, modern experience, including a downloadable CV and sections optimized for quick reading (skills, experience and projects). Built with Next.js, Tailwind CSS and TypeScript, prioritizing SEO, performance and responsive design. The goal was to communicate my value proposition clearly and professionally, with strong accessibility and consistent visual structure.'
+    : 'Desarrollé un sitio web personal para presentar mi perfil profesional con una experiencia clara y moderna, integrando una versión descargable del CV y secciones optimizadas para lectura rápida (skills, experiencia y proyectos). Lo construí con Next.js, Tailwind CSS y TypeScript, priorizando SEO, performance (carga rápida, assets optimizados) y diseño responsive para desktop y mobile. El objetivo fue comunicar mi propuesta de valor de forma directa y profesional, cuidando accesibilidad, estructura y consistencia visual.',
+
+  p2_sub: lang === 'en' ? 'Corporate Website' : 'Corporate Website',
+  p2_title: lang === 'en' ? 'ZAT — Corporate site' : 'ZAT — Sitio corporativo',
+  p2_desc: lang === 'en'
+    ? 'Corporate B2B website improvements focused on structure, performance and user experience. Emphasis on clear messaging, value-driven sections (services/cases) and responsive optimization.'
+    : 'Implementé mejoras de estructura, performance y experiencia de usuario para un sitio corporativo B2B. Enfoque en claridad del mensaje, secciones de valor (servicios/casos) y optimización responsive.',
+
+  p3_sub: lang === 'en' ? 'E-commerce' : 'E-commerce',
+  p3_title: lang === 'en' ? 'Andrea Skin — Store & Catalog' : 'Andrea Skin — Tienda & Catálogo',
+  p3_desc: lang === 'en'
+    ? 'Conversion-oriented e-commerce experience: simple navigation, clear catalog and responsive design. Optimized structure and components for a smooth purchase flow.'
+    : 'Proyecto orientado a conversión: navegación simple, catálogo claro y diseño responsive. Optimicé estructura de secciones y componentes para una experiencia de compra fluida.',
+
+  p4_sub: lang === 'en' ? 'Corporate / Pharma' : 'Corporate / Pharma',
+  p4_title: lang === 'en' ? 'Roxfarma — Corporate website' : 'Roxfarma — Web corporativa',
+  p4_desc: lang === 'en'
+    ? 'Corporate website for a pharmaceutical lab focused on navigation, informative sections (certifications, products, services) and clear content for end users.'
+    : 'Sitio corporativo para laboratorio farmacéutico con enfoque en navegación, secciones informativas (certificaciones, productos, servicios) y contenido claro para usuarios finales.',
+
+  p5_sub: lang === 'en' ? 'Data / Content' : 'Data / Content',
+  p5_title: lang === 'en' ? 'Verisure Observatory — Content & UX' : 'Observatorio Verisure — Contenido & UX',
+  p5_desc: lang === 'en'
+    ? 'Content-first informational site focused on hierarchy, navigation modules and clear presentation of reports and sections.'
+    : 'Página informativa enfocada en contenido, jerarquía y módulos de navegación. Trabajé mejoras de estructura y presentación para una lectura clara de reportes y secciones.',
+};
 ---
 
 <section id="projects" data-spy="true" class="max-w-5xl mx-auto px-4 py-16">
-  <h2 class="text-2xl font-semibold mb-6">Proyectos</h2>
+  <h2 class="text-2xl font-semibold mb-6">{t.title}</h2>
 
   <div class="space-y-10">
     <!-- Project 1 -->
@@ -11,26 +48,25 @@ import { Icon } from "astro-icon/components";
       class="bg-white rounded-2xl shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300 p-6 flex flex-col md:flex-row items-center gap-8"
     >
       <div class="flex-1">
-        <p class="text-blue-700 font-semibold mb-1">Curriculum Vitae Project</p>
-        <h3 class="text-xl font-bold mb-3">CV Presentation</h3>
+        <p class="text-blue-700 font-semibold mb-1">{t.p1_sub}</p>
+        <h3 class="text-xl font-bold mb-3">{t.p1_title}</h3>
         <p class="text-gray-700 leading-relaxed mb-4">
-          Creé un sitio web personal para presentar mi experiencia profesional de forma detallada, 
-          incluyendo una versión descargable de mi CV. Desarrollado con <strong>Astro</strong>, 
-          <strong>Tailwind CSS</strong> y <strong>TypeScript</strong>, priorizando SEO, performance y diseño responsive.
+          {t.p1_desc}
         </p>
         <a
-        href="https://davidbeslanga.com"
+        href="https://portfolio-sepia-theta-58.vercel.app/"
         target="_blank"
+        rel="noopener noreferrer"
         class="inline-flex items-center gap-2 bg-blue-700 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-800 transition-colors"
       >
-        Ver proyecto
+        {t.cta}
         <Icon name="mdi:arrow-right" class="w-4 h-4" />
       </a>
       </div>
       <img
-        src="/projects/cv-preview.webp"
+        src="/projects/cv-portafolio.webp"
         alt="CV presentation preview"
-        class="w-full md:w-1/2 rounded-xl shadow-sm object-cover"
+        class="w-full md:w-1/2 aspect-[16/9] rounded-2xl shadow-md ring-1 ring-black/10 object-cover"
       />
     </div>
 
@@ -39,27 +75,27 @@ import { Icon } from "astro-icon/components";
       class="bg-white rounded-2xl shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300 p-6 flex flex-col md:flex-row-reverse items-center gap-8"
     >
       <div class="flex-1">
-        <p class="text-blue-700 font-semibold mb-1">Personal Project</p>
-        <h3 class="text-xl font-bold mb-3">Full-Stack Project</h3>
+        <p class="text-blue-700 font-semibold mb-1">{t.p2_sub}</p>
+        <h3 class="text-xl font-bold mb-3">{t.p2_title}</h3>
         <p class="text-gray-700 leading-relaxed mb-4">
-          Desarrollé una aplicación web full-stack con <strong>Next.js</strong>, 
-          <strong>Node.js</strong> y <strong>MongoDB</strong>, integrando autenticación 
-          y panel administrativo. Implementé arquitectura REST y UI moderna 
-          con componentes reutilizables y enfoque en performance.
+          {t.p2_desc}
         </p>
         <a
-        href="https://davidbeslanga.com"
-        target="_blank"
-        class="inline-flex items-center gap-2 bg-blue-700 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-800 transition-colors"
-      >
-        Ver proyecto
-        <Icon name="mdi:arrow-right" class="w-4 h-4" />
-      </a>
+          href="https://zat.pe/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-blue-700 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-800 transition-colors"
+        >
+          {t.cta}
+          <Icon name="mdi:arrow-right" class="w-4 h-4" />
+        </a>
       </div>
       <img
-        src="/projects/fullstack-preview.webp"
-        alt="Full stack project preview"
-        class="w-full md:w-1/2 rounded-xl shadow-sm object-cover"
+        src="/projects/zat.webp"
+        alt="ZAT website preview"
+        class="w-full md:w-1/2 aspect-[16/9] rounded-2xl shadow-md ring-1 ring-black/10 object-cover"
+        loading="lazy"
+        decoding="async"
       />
     </div>
 
@@ -68,27 +104,85 @@ import { Icon } from "astro-icon/components";
       class="bg-white rounded-2xl shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300 p-6 flex flex-col md:flex-row items-center gap-8"
     >
       <div class="flex-1">
-        <p class="text-blue-700 font-semibold mb-1">Corporate Project</p>
-        <h3 class="text-xl font-bold mb-3">Landing Optimization Verisure</h3>
+        <p class="text-blue-700 font-semibold mb-1">{t.p3_sub}</p>
+        <h3 class="text-xl font-bold mb-3">{t.p3_title}</h3>
         <p class="text-gray-700 leading-relaxed mb-4">
-          Refactoricé y optimicé las landing pages de <strong>Verisure Perú</strong> y <strong>Latam</strong>, 
-          reduciendo tiempos de carga y mejorando métricas Core Web Vitals. 
-          Implementé <strong>lazy loading</strong>, <strong>optimizaciones SEO</strong> y 
-          <strong>marcado estructurado JSON-LD</strong>.
+          {t.p3_desc}
         </p>
         <a
-        href="https://davidbeslanga.com"
-        target="_blank"
-        class="inline-flex items-center gap-2 bg-blue-700 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-800 transition-colors"
-      >
-        Ver proyecto
-        <Icon name="mdi:arrow-right" class="w-4 h-4" />
-      </a>
+          href="https://andreaskinsrl.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-blue-700 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-800 transition-colors"
+        >
+          {t.cta}
+          <Icon name="mdi:arrow-right" class="w-4 h-4" />
+        </a>
       </div>
       <img
-        src="/projects/verisure-preview.webp"
-        alt="Verisure project preview"
-        class="w-full md:w-1/2 rounded-xl shadow-sm object-cover"
+        src="/projects/andrea-skin.webp"
+        alt="Andrea Skin website preview"
+        class="w-full md:w-1/2 aspect-[16/9] rounded-2xl shadow-md ring-1 ring-black/10 object-cover"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <!-- Project 4 -->
+    <div
+      class="bg-white rounded-2xl shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300 p-6 flex flex-col md:flex-row-reverse items-center gap-8"
+    >
+      <div class="flex-1">
+        <p class="text-blue-700 font-semibold mb-1">{t.p4_sub}</p>
+        <h3 class="text-xl font-bold mb-3">{t.p4_title}</h3>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          {t.p4_desc}
+        </p>
+        <a
+          href="https://roxfarma.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-blue-700 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-800 transition-colors"
+        >
+          {t.cta}
+          <Icon name="mdi:arrow-right" class="w-4 h-4" />
+        </a>
+      </div>
+      <img
+        src="/projects/roxfarma.webp"
+        alt="Roxfarma website preview"
+        class="w-full md:w-1/2 aspect-[16/9] rounded-2xl shadow-md ring-1 ring-black/10 object-cover"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <!-- Project 5 -->
+    <div
+      class="bg-white rounded-2xl shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300 p-6 flex flex-col md:flex-row items-center gap-8"
+    >
+      <div class="flex-1">
+        <p class="text-blue-700 font-semibold mb-1">{t.p5_sub}</p>
+        <h3 class="text-xl font-bold mb-3">{t.p5_title}</h3>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          {t.p5_desc}
+        </p>
+        <a
+          href="https://observatorioverisure.pe/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-blue-700 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-800 transition-colors"
+        >
+          {t.cta}
+          <Icon name="mdi:arrow-right" class="w-4 h-4" />
+        </a>
+      </div>
+      <img
+        src="/projects/observatorio.webp"
+        alt="Observatorio Verisure website preview"
+        class="w-full md:w-1/2 aspect-[16/9] rounded-2xl shadow-md ring-1 ring-black/10 object-cover"
+        loading="lazy"
+        decoding="async"
       />
     </div>
   </div>
