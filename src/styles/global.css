@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+:root{
+    --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    --font-display: "Sora", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
+
+  html, body{
+    font-family: var(--font-sans);
+  }
+  
+  h1, h2, h3, .title, .heading{
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  
+  p{
+    line-height: 1.65;
+  }

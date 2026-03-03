@@ -6,9 +6,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "start": "node dist/server/entry.mjs",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/node": "^9.5.4",
     "astro": "^5.18.0",
     "astro-icon": "^1.1.5",
     "resend": "^6.9.3"

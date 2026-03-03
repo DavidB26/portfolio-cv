@@ -1,6 +1,4 @@
 ---
-import { actions } from "astro:actions";
-
 const { lang = 'es' } = Astro.props;
 const t = {
   emailLabel: 'Email',
@@ -16,7 +14,7 @@ const t = {
   id="contact-form"
   data-contact
   novalidate
-  action={actions.sendContactEmail}
+  action="/api/contact"
 >
   <div
     id="contact-status"
@@ -61,13 +59,17 @@ const t = {
   </div>
 </form>
 <script>
+  // @ts-check
   /** @type {HTMLFormElement | null} */
   const form = document.getElementById('contact-form')
 
   /** @type {HTMLDivElement | null} */
   const statusEl = document.getElementById('contact-status')
 
-  /** @param {string} message @param {'success' | 'error'} [type='success'] */
+  /**
+   * @param {string} message
+   * @param {'success' | 'error'} [type='success']
+   */
   const showStatus = (message, type = 'success') => {
     if (!statusEl) return
     statusEl.classList.remove('hidden')
@@ -93,9 +95,12 @@ const t = {
 
   /** @param {boolean} disabled */
   const disableSubmit = (disabled) => {
-    /** @type {HTMLButtonElement | null} */
-    const btn = form ? form.querySelector('button[type="submit"]') : null
+    const btn = form
+      ? /** @type {HTMLButtonElement | null} */ (form.querySelector('button[type="submit"]'))
+      : null
+
     if (!btn) return
+
     btn.disabled = disabled
     btn.classList.toggle('opacity-60', disabled)
     btn.classList.toggle('cursor-not-allowed', disabled)
@@ -112,8 +117,8 @@ const t = {
       const formEl = /** @type {any} */ (e.target)
       const formData = new FormData(formEl)
 
-      // Call Astro Action endpoint directly (works in client), use action attr fallback
-      const endpoint = formEl.getAttribute('action') || '/_actions/sendContactEmail'
+      // Sending FormData (multipart/form-data) to the SSR API route.
+      const endpoint = formEl.getAttribute('action') || '/api/contact'
 
       const res = await fetch(endpoint, {
         method: 'POST',
