@@ -9,9 +9,18 @@ import fa6solid from '@iconify-json/fa6-solid/icons.json';
 import logos from '@iconify-json/logos/icons.json';
 
 export default defineConfig({
+  site: 'https://davidbeslanga.com',
   output: 'server',
   adapter: node({ mode: 'standalone' }),
-  security: { checkOrigin: false },
+  security: {
+    checkOrigin: true,
+    allowedDomains: [
+      { protocol: 'https', hostname: 'davidbeslanga.com' },
+      { protocol: 'https', hostname: 'www.davidbeslanga.com' },
+      { protocol: 'http', hostname: 'localhost' },
+      { protocol: 'http', hostname: '127.0.0.1' },
+    ],
+  },
   integrations: [
     icon({
       collections: {
@@ -41,6 +50,16 @@ export default defineConfig({
         access: 'secret',
         optional: false,
         default: 'INFORM_VALID_TOKEN'
+      }),
+      PUBLIC_TURNSTILE_SITE_KEY: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true
+      }),
+      TURNSTILE_SECRET_KEY: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: true
       })
     }
   },

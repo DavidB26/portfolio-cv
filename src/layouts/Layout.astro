@@ -1,13 +1,102 @@
 ---
 import '../styles/global.css';
 import Header from '../components/Header.astro';
-const { lang = 'es', title = 'Portafolio' } = Astro.props;
+
+const { lang = 'es', title, description } = Astro.props;
+
+const isEnglish = lang === 'en';
+const pageTitle = title ?? (isEnglish
+  ? 'Freelance Front-End Developer in Lima | David Beslanga'
+  : 'Desarrollador web freelance en Lima | David Beslanga');
+const pageDescription = description ?? (isEnglish
+  ? 'I build fast, accessible and conversion-focused landing pages and websites for businesses in Peru and Latin America.'
+  : 'Diseño y desarrollo landing pages y sitios web rápidos, accesibles y orientados a convertir visitas en clientes en Perú y Latinoamérica.');
+
+const siteUrl = Astro.site ?? new URL('https://davidbeslanga.com');
+const canonicalUrl = new URL(isEnglish ? '/en/' : '/', siteUrl);
+const spanishUrl = new URL('/', siteUrl);
+const englishUrl = new URL('/en/', siteUrl);
+const socialImageUrl = new URL('/projects/cv-portafolio.webp', siteUrl);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl.href}#website`,
+      url: siteUrl.href,
+      name: 'David Beslanga',
+      inLanguage: ['es-PE', 'en'],
+    },
+    {
+      '@type': 'ProfilePage',
+      '@id': `${canonicalUrl.href}#profile`,
+      url: canonicalUrl.href,
+      name: pageTitle,
+      description: pageDescription,
+      inLanguage: isEnglish ? 'en' : 'es-PE',
+      mainEntity: {
+        '@type': 'Person',
+        '@id': `${siteUrl.href}#person`,
+        name: 'David Beslanga',
+        jobTitle: isEnglish ? 'Front-End Web Developer' : 'Desarrollador Web Front-End',
+        url: siteUrl.href,
+        image: new URL('/profile/yo.webp', siteUrl).href,
+        email: 'mailto:contact@davidbeslanga.com',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Lima',
+          addressCountry: 'PE',
+        },
+        sameAs: [
+          'https://www.linkedin.com/in/david-beslanga/',
+          'https://github.com/DavidB26',
+        ],
+        knowsAbout: [
+          'Front-end development',
+          'Landing pages',
+          'Web performance',
+          'Conversion rate optimization',
+          'SEO',
+          'WordPress',
+          'React',
+        ],
+      },
+    },
+  ],
+};
 ---
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="author" content="David Beslanga" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#2563eb" />
+
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="es-PE" href={spanishUrl} />
+    <link rel="alternate" hreflang="en" href={englishUrl} />
+    <link rel="alternate" hreflang="x-default" href={spanishUrl} />
+    <link rel="sitemap" href="/sitemap.xml" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="David Beslanga" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:alt" content={isEnglish ? 'David Beslanga web development portfolio' : 'Portafolio de desarrollo web de David Beslanga'} />
+    <meta property="og:locale" content={isEnglish ? 'en_US' : 'es_PE'} />
+    <meta property="og:locale:alternate" content={isEnglish ? 'es_PE' : 'en_US'} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={socialImageUrl} />
+
     <link rel="icon" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,9 +107,12 @@ const { lang = 'es', title = 'Portafolio' } = Astro.props;
     <style>
       :target { scroll-margin-top: 72px; }
     </style>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body class="bg-gray-50 text-gray-900" id="top">
     <Header lang={lang} />
-    <slot />
+    <main id="main-content">
+      <slot />
+    </main>
   </body>
 </html>

@@ -1,0 +1,177 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const { lang = 'es' } = Astro.props;
+const isEnglish = lang === 'en';
+
+const content = {
+  title: isEnglish ? 'Experience details' : 'Detalles de experiencia',
+  hint: isEnglish ? 'Open a role to see responsibilities and results.' : 'Abre un puesto para ver responsabilidades y resultados.',
+};
+
+const roles = isEnglish
+  ? [
+      {
+        id: 'rol-verisure',
+        role: 'Front-End Developer',
+        company: 'Verisure',
+        date: 'May 2023 – Present',
+        intro: 'Technical and visual optimization of Verisure Peru and LatAm landing pages, focused on performance, accessibility and conversion.',
+        bullets: [
+          'Reduced load times from approximately 7 seconds to under 3 seconds through lazy loading, asset minification, image optimization and code refactoring.',
+          'Improved component architecture and interaction flows using accessibility and CRO principles.',
+          'Built the Security Observatory in WordPress with dynamic data and an SEO-focused structure.',
+          'Implemented the corporate blog redesign in Drupal with a scalable and maintainable approach.',
+          'Worked with Design, SEO and Marketing teams to align business and user goals.',
+        ],
+      },
+      {
+        id: 'rol-tottus',
+        role: 'Front-End Developer',
+        company: 'Tottus Chile',
+        date: 'September 2021 – January 2024',
+        intro: 'Development and optimization of modular landing pages for promotions and campaigns.',
+        bullets: [
+          'Built modular landing pages focused on visibility, speed and conversion.',
+          'Applied semantic HTML, responsive design and front-end performance practices.',
+          'Integrated Firebase, Contentful and ContentStack for dynamic content management.',
+          'Developed reusable interfaces with jQuery and Bootstrap.',
+          'Reduced friction across key navigation and campaign flows.',
+        ],
+      },
+      {
+        id: 'rol-centrum',
+        role: 'Web Developer',
+        company: 'Centrum PUCP',
+        date: 'April 2020 – September 2021',
+        intro: 'Custom landing pages and marketing automation integrations for lead acquisition.',
+        bullets: [
+          'Developed and optimized landing pages in Eloqua with analytics integrations.',
+          'Built scalable responsive structures with Bootstrap, HTML5 and CSS3.',
+          'Collaborated on visual adaptations using Photoshop and Figma.',
+          'Maintained brand consistency, accessibility and conversion standards.',
+          'Helped optimize the acquisition funnel and digital presence.',
+        ],
+      },
+      {
+        id: 'rol-electo',
+        role: 'Web Developer',
+        company: 'Electo',
+        date: 'April 2018 – April 2020',
+        intro: 'Email marketing campaigns, websites and blogs for multiple clients.',
+        bullets: [
+          'Improved HTML/CSS email layouts for better cross-client compatibility.',
+          'Built websites following W3C standards and responsive practices.',
+          'Developed blogs and websites with Laravel and WordPress.',
+          'Managed deployments and front-end quality checks.',
+          'Collaborated with multidisciplinary digital communication teams.',
+        ],
+      },
+    ]
+  : [
+      {
+        id: 'rol-verisure',
+        role: 'Programador Front-End',
+        company: 'Verisure',
+        date: 'Mayo 2023 – Actualidad',
+        intro: 'Optimización técnica y visual de las landing pages de Verisure Perú y Latam, con foco en rendimiento, accesibilidad y conversión.',
+        bullets: [
+          'Reduje los tiempos de carga de aproximadamente 7 segundos a menos de 3 mediante lazy loading, minificación, optimización de imágenes y refactorización.',
+          'Mejoré la arquitectura de componentes y los flujos de interacción aplicando accesibilidad y CRO.',
+          'Desarrollé el Observatorio de Seguridad en WordPress con datos dinámicos y estructura SEO.',
+          'Implementé el rediseño del blog corporativo en Drupal con un enfoque escalable y mantenible.',
+          'Trabajé con equipos de Diseño, SEO y Marketing para alinear objetivos de negocio y experiencia.',
+        ],
+      },
+      {
+        id: 'rol-tottus',
+        role: 'Desarrollador Front-End',
+        company: 'Tottus Chile',
+        date: 'Setiembre 2021 – Enero 2024',
+        intro: 'Desarrollo y optimización de landing pages modulares para ofertas y campañas promocionales.',
+        bullets: [
+          'Construí landing pages modulares enfocadas en visibilidad, velocidad y conversión.',
+          'Apliqué HTML semántico, diseño responsive y prácticas de rendimiento front-end.',
+          'Integré Firebase, Contentful y ContentStack para administrar contenido dinámico.',
+          'Desarrollé interfaces reutilizables con jQuery y Bootstrap.',
+          'Reduje la fricción en flujos clave de navegación y campañas.',
+        ],
+      },
+      {
+        id: 'rol-centrum',
+        role: 'Programador Web',
+        company: 'Centrum PUCP',
+        date: 'Abril 2020 – Setiembre 2021',
+        intro: 'Landing pages personalizadas e integraciones de automatización para la captación de leads.',
+        bullets: [
+          'Desarrollé y optimicé landing pages en Eloqua con integraciones de analítica.',
+          'Construí estructuras responsive y escalables con Bootstrap, HTML5 y CSS3.',
+          'Colaboré en adaptaciones visuales utilizando Photoshop y Figma.',
+          'Mantuve los estándares de marca, accesibilidad y conversión.',
+          'Contribuí a optimizar el funnel de captación y la presencia digital.',
+        ],
+      },
+      {
+        id: 'rol-electo',
+        role: 'Programador Web',
+        company: 'Electo',
+        date: 'Abril 2018 – Abril 2020',
+        intro: 'Campañas de email marketing, sitios web y blogs para múltiples clientes.',
+        bullets: [
+          'Mejoré la maquetación HTML/CSS de correos para aumentar la compatibilidad entre clientes.',
+          'Construí sitios siguiendo estándares W3C y prácticas responsive.',
+          'Desarrollé blogs y sitios con Laravel y WordPress.',
+          'Gestioné despliegues y controles de calidad front-end.',
+          'Colaboré con equipos multidisciplinarios de comunicación digital.',
+        ],
+      },
+    ];
+---
+
+<section id="experience-details" class="mx-auto max-w-5xl px-4 pb-16">
+  <h2 class="text-2xl font-semibold">{content.title}</h2>
+  <p class="mt-2 text-sm text-slate-600">{content.hint}</p>
+
+  <div class="mt-6 space-y-3">
+    {roles.map((item) => (
+      <details id={item.id} class="group scroll-mt-24 rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 marker:content-none">
+          <span>
+            <strong class="block text-slate-950">{item.role} · {item.company}</strong>
+            <span class="mt-1 block text-sm text-slate-500">{item.date}</span>
+          </span>
+          <Icon name="mdi:chevron-down" class="h-5 w-5 shrink-0 text-slate-500 transition-transform group-open:rotate-180" />
+        </summary>
+        <div class="border-t border-slate-100 px-5 py-5">
+          <p class="leading-7 text-slate-700">{item.intro}</p>
+          <ul class="mt-4 space-y-2 text-sm leading-6 text-slate-700">
+            {item.bullets.map((bullet) => (
+              <li class="flex gap-2">
+                <Icon name="mdi:check" class="mt-1 h-4 w-4 shrink-0 text-emerald-600" />
+                {bullet}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </details>
+    ))}
+  </div>
+</section>
+
+<script>
+  const openExperienceFromHash = () => {
+    if (!window.location.hash.startsWith('#rol-')) return;
+    const target = document.querySelector(window.location.hash);
+    if (target instanceof HTMLDetailsElement) target.open = true;
+  };
+
+  document.querySelectorAll('[data-experience-link]').forEach((link) => {
+    link.addEventListener('click', () => {
+      const target = document.querySelector(link.getAttribute('href') || '');
+      if (target instanceof HTMLDetailsElement) target.open = true;
+    });
+  });
+
+  window.addEventListener('hashchange', openExperienceFromHash);
+  openExperienceFromHash();
+</script>

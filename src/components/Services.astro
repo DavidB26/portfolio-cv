@@ -1,0 +1,72 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const { lang = 'es' } = Astro.props;
+const isEnglish = lang === 'en';
+
+const content = {
+  title: isEnglish ? 'Services' : 'Servicios',
+  intro: isEnglish
+    ? 'Web development focused on clarity, performance and real business goals.'
+    : 'Desarrollo web enfocado en claridad, rendimiento y objetivos reales de negocio.',
+  cta: isEnglish ? 'Request a project assessment' : 'Solicitar una evaluación',
+};
+
+const services = isEnglish
+  ? [
+      {
+        icon: 'mdi:rocket-launch-outline',
+        title: 'Landing pages',
+        description: 'Campaign and service pages with a clear message, responsive development and conversion-oriented UX.',
+      },
+      {
+        icon: 'mdi:monitor-cellphone',
+        title: 'Corporate websites',
+        description: 'Fast and maintainable websites built with Astro, React or WordPress and a solid technical SEO foundation.',
+      },
+      {
+        icon: 'mdi:speedometer',
+        title: 'Performance and CRO',
+        description: 'Technical and usability improvements for websites that load slowly or are not generating enough leads.',
+      },
+    ]
+  : [
+      {
+        icon: 'mdi:rocket-launch-outline',
+        title: 'Landing pages',
+        description: 'Páginas para campañas y servicios con mensaje claro, desarrollo responsive y UX orientada a conversión.',
+      },
+      {
+        icon: 'mdi:monitor-cellphone',
+        title: 'Sitios web corporativos',
+        description: 'Webs rápidas y mantenibles con Astro, React o WordPress y una base sólida de SEO técnico.',
+      },
+      {
+        icon: 'mdi:speedometer',
+        title: 'Rendimiento y CRO',
+        description: 'Mejoras técnicas y de usabilidad para sitios que cargan lento o no están generando suficientes oportunidades.',
+      },
+    ];
+---
+
+<section id="services" data-spy="true" class="mx-auto mb-6 max-w-5xl rounded-2xl border border-gray-100 bg-white px-4 py-16 shadow-sm">
+  <h2 class="text-2xl font-semibold">{content.title}</h2>
+  <p class="mt-3 max-w-2xl text-gray-600">{content.intro}</p>
+
+  <div class="mt-8 grid gap-5 md:grid-cols-3">
+    {services.map((service) => (
+      <article class="group rounded-2xl border border-gray-200 bg-gray-50/50 p-5 transition duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-sm">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-100">
+          <Icon name={service.icon} class="h-5 w-5" />
+        </span>
+        <h3 class="mt-4 text-lg font-bold text-gray-900">{service.title}</h3>
+        <p class="mt-2 text-sm leading-6 text-gray-600">{service.description}</p>
+      </article>
+    ))}
+  </div>
+
+  <a href="#contact" class="mt-7 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 transition-colors hover:bg-blue-100 hover:text-blue-800">
+    {content.cta}
+    <Icon name="mdi:arrow-right" class="h-4 w-4" />
+  </a>
+</section>

@@ -1,43 +1,37 @@
-# Astro Starter Kit: Minimal
+# David Beslanga — Portafolio profesional
+
+Portafolio bilingüe construido con Astro y Tailwind CSS. Presenta servicios, experiencia y proyectos, e incluye un formulario de contacto conectado a Resend.
+
+## Desarrollo local
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+La compilación de producción se valida con:
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```sh
+npm run build
+npx tsc --noEmit
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Variables de entorno
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Copia `.env.example` a `.env` y configura:
 
-Any static assets, like images, can be placed in the `public/` directory.
+- `RESEND_API_KEY`: clave privada de Resend.
+- `FROM_EMAIL`: remitente de un dominio verificado en Resend.
+- `TO_EMAIL`: correo que recibirá las consultas.
+- `PUBLIC_TURNSTILE_SITE_KEY`: clave pública opcional de Cloudflare Turnstile.
+- `TURNSTILE_SECRET_KEY`: clave privada opcional de Cloudflare Turnstile.
 
-## 🧞 Commands
+Las dos variables de Turnstile deben configurarse juntas. Si están presentes, el formulario muestra el widget y valida cada token en el servidor.
 
-All commands are run from the root of the project, from a terminal:
+## Protección del formulario
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+El endpoint aplica validación del lado del servidor, límite de tamaño, rate limiting por IP, honeypot, control de tiempo, protección de origen, escape de HTML e idempotencia en el envío. La ruta antigua de Astro Actions fue eliminada para evitar un segundo punto de entrada sin estas protecciones.
 
-## 👀 Want to learn more?
+## SEO
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+El sitio incluye URL canónica, metadatos sociales, datos estructurados, etiquetas `hreflang`, `robots.txt` y `sitemap.xml`. Después de desplegar, registra el dominio en Google Search Console y envía `https://davidbeslanga.com/sitemap.xml`.

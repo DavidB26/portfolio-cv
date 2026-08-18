@@ -1,174 +1,246 @@
 ---
+import { PUBLIC_TURNSTILE_SITE_KEY } from 'astro:env/client';
+
 const { lang = 'es' } = Astro.props;
+const isEnglish = lang === 'en';
 const t = {
+  nameLabel: isEnglish ? 'Name' : 'Nombre',
+  namePlaceholder: isEnglish ? 'Your name' : 'Tu nombre',
   emailLabel: 'Email',
-  emailPlaceholder: lang === 'en' ? 'your.email@example.com' : 'tu.email@ejemplo.com',
-  messageLabel: lang === 'en' ? 'Message' : 'Mensaje',
-  messagePlaceholder: lang === 'en' ? 'Tell me briefly how I can help you' : 'Cuéntame brevemente en qué puedo ayudarte',
-  send: lang === 'en' ? 'Send' : 'Enviar',
+  emailPlaceholder: isEnglish ? 'you@company.com' : 'tu@empresa.com',
+  serviceLabel: isEnglish ? 'What do you need?' : '¿Qué necesitas?',
+  servicePlaceholder: isEnglish ? 'Select a service' : 'Selecciona un servicio',
+  messageLabel: isEnglish ? 'Tell me about your project' : 'Cuéntame sobre tu proyecto',
+  messagePlaceholder: isEnglish
+    ? 'What do you want to build or improve? Include your goal and desired timeline.'
+    : '¿Qué quieres crear o mejorar? Incluye tu objetivo y el plazo que tienes en mente.',
+  send: isEnglish ? 'Request an assessment' : 'Solicitar evaluación',
+  sending: isEnglish ? 'Sending…' : 'Enviando…',
+  privacy: isEnglish
+    ? 'Your information will only be used to reply to this request.'
+    : 'Tus datos solo se usarán para responder esta solicitud.',
+  verification: isEnglish ? 'Security verification' : 'Verificación de seguridad',
 };
+
+const services = isEnglish
+  ? [
+      ['landing-page', 'Landing page'],
+      ['corporate-website', 'Corporate website'],
+      ['performance-cro', 'Performance / CRO improvement'],
+      ['maintenance', 'Front-end maintenance'],
+      ['other', 'Other'],
+    ]
+  : [
+      ['landing-page', 'Landing page'],
+      ['corporate-website', 'Sitio web corporativo'],
+      ['performance-cro', 'Mejora de rendimiento / CRO'],
+      ['maintenance', 'Mantenimiento front-end'],
+      ['other', 'Otro'],
+    ];
 ---
+
 <form
-  class="space-y-6"
+  class="space-y-5"
   method="POST"
-  id="contact-form"
+  id={`contact-form-${lang}`}
   data-contact
+  data-lang={lang}
   novalidate
   action="/api/contact"
 >
   <div
-    id="contact-status"
-    class="hidden px-4 py-3 text-sm border rounded-xl border-slate-200 bg-slate-50 text-slate-700"
+    data-contact-status
+    class="hidden rounded-xl border px-4 py-3 text-sm"
     role="status"
     aria-live="polite"
   ></div>
-  <div>
-    <label for="email" class="block mb-1 text-sm font-medium text-slate-800">
-      {t.emailLabel}
-    </label>
-    <input
-      id="email"
-      name="email"
-      type="email"
-      required
-      placeholder={t.emailPlaceholder}
-      class="w-full px-4 py-3 text-sm border rounded-lg shadow-sm border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-    />
+
+  <input type="hidden" name="language" value={lang} />
+  <input type="hidden" name="started_at" value={Date.now()} data-started-at />
+
+  <div class="absolute -left-[10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+    <label for={`company-website-${lang}`}>Website</label>
+    <input id={`company-website-${lang}`} name="company_website" type="text" tabindex="-1" autocomplete="off" />
   </div>
-  <!-- Message -->
+
+  <div class="grid gap-5 sm:grid-cols-2">
+    <div>
+      <label for={`name-${lang}`} class="mb-1.5 block text-sm font-semibold text-slate-800">{t.nameLabel}</label>
+      <input
+        id={`name-${lang}`}
+        name="name"
+        type="text"
+        required
+        minlength="2"
+        maxlength="80"
+        autocomplete="name"
+        placeholder={t.namePlaceholder}
+        class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+      />
+    </div>
+    <div>
+      <label for={`email-${lang}`} class="mb-1.5 block text-sm font-semibold text-slate-800">{t.emailLabel}</label>
+      <input
+        id={`email-${lang}`}
+        name="email"
+        type="email"
+        required
+        maxlength="254"
+        autocomplete="email"
+        inputmode="email"
+        placeholder={t.emailPlaceholder}
+        class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+      />
+    </div>
+  </div>
+
   <div>
-    <label for="message" class="block mb-1 text-sm font-medium text-slate-800">
-      {t.messageLabel}
-    </label>
+    <label for={`service-${lang}`} class="mb-1.5 block text-sm font-semibold text-slate-800">{t.serviceLabel}</label>
+    <select
+      id={`service-${lang}`}
+      name="service"
+      required
+      class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+    >
+      <option value="" selected disabled>{t.servicePlaceholder}</option>
+      {services.map(([value, label]) => <option value={value}>{label}</option>)}
+    </select>
+  </div>
+
+  <div>
+    <label for={`message-${lang}`} class="mb-1.5 block text-sm font-semibold text-slate-800">{t.messageLabel}</label>
     <textarea
-      id="message"
+      id={`message-${lang}`}
       name="message"
       required
-      rows="5"   
+      minlength="20"
+      maxlength="2000"
+      rows="6"
       placeholder={t.messagePlaceholder}
-      class="w-full px-4 py-3 text-sm border rounded-lg shadow-sm resize-none border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+      class="w-full resize-none rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
     ></textarea>
   </div>
-  <div class="flex justify-end">
+
+  {PUBLIC_TURNSTILE_SITE_KEY && (
+    <div>
+      <span class="sr-only">{t.verification}</span>
+      <div
+        class="cf-turnstile"
+        data-sitekey={PUBLIC_TURNSTILE_SITE_KEY}
+        data-action="contact"
+        data-theme="light"
+      ></div>
+    </div>
+  )}
+
+  <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <p class="text-xs leading-5 text-slate-500">{t.privacy}</p>
     <button
       type="submit"
-      class="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      data-default-label={t.send}
+      data-sending-label={t.sending}
+      class="inline-flex shrink-0 items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
     >
       {t.send}
     </button>
   </div>
 </form>
+
+{PUBLIC_TURNSTILE_SITE_KEY && (
+  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+)}
+
 <script>
-  // @ts-check
-  /** @type {HTMLFormElement | null} */
-  const form = document.getElementById('contact-form')
+  const forms = document.querySelectorAll('form[data-contact]');
 
-  /** @type {HTMLDivElement | null} */
-  const statusEl = document.getElementById('contact-status')
+  forms.forEach((formNode) => {
+    const form = /** @type {HTMLFormElement} */ (formNode);
+    const statusEl = /** @type {HTMLDivElement | null} */ (form.querySelector('[data-contact-status]'));
+    const submitButton = /** @type {HTMLButtonElement | null} */ (form.querySelector('button[type="submit"]'));
+    const startedAt = /** @type {HTMLInputElement | null} */ (form.querySelector('[data-started-at]'));
+    const isEnglish = form.dataset.lang === 'en';
 
-  /**
-   * @param {string} message
-   * @param {'success' | 'error'} [type='success']
-   */
-  const showStatus = (message, type = 'success') => {
-    if (!statusEl) return
-    statusEl.classList.remove('hidden')
+    if (startedAt) startedAt.value = String(Date.now());
 
-    // reset styles
-    statusEl.classList.remove('border-green-200', 'bg-green-50', 'text-green-700')
-    statusEl.classList.remove('border-red-200', 'bg-red-50', 'text-red-700')
+    /** @param {string} message @param {'success' | 'error'} type */
+    const showStatus = (message, type) => {
+      if (!statusEl) return;
+      statusEl.classList.remove(
+        'hidden',
+        'border-emerald-200',
+        'bg-emerald-50',
+        'text-emerald-800',
+        'border-red-200',
+        'bg-red-50',
+        'text-red-800',
+      );
+      statusEl.classList.add(...(type === 'success'
+        ? ['border-emerald-200', 'bg-emerald-50', 'text-emerald-800']
+        : ['border-red-200', 'bg-red-50', 'text-red-800']));
+      statusEl.textContent = message;
+    };
 
-    if (type === 'error') {
-      statusEl.classList.add('border-red-200', 'bg-red-50', 'text-red-700')
-    } else {
-      statusEl.classList.add('border-green-200', 'bg-green-50', 'text-green-700')
-    }
+    /** @param {boolean} pending */
+    const setPending = (pending) => {
+      if (!submitButton) return;
+      submitButton.disabled = pending;
+      submitButton.setAttribute('aria-busy', String(pending));
+      submitButton.textContent = pending
+        ? submitButton.dataset.sendingLabel || '…'
+        : submitButton.dataset.defaultLabel || 'Send';
+    };
 
-    statusEl.textContent = message
-  }
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      statusEl?.classList.add('hidden');
 
-  const hideStatus = () => {
-    if (!statusEl) return
-    statusEl.classList.add('hidden')
-    statusEl.textContent = ''
-  }
-
-  /** @param {boolean} disabled */
-  const disableSubmit = (disabled) => {
-    const btn = form
-      ? /** @type {HTMLButtonElement | null} */ (form.querySelector('button[type="submit"]'))
-      : null
-
-    if (!btn) return
-
-    btn.disabled = disabled
-    btn.classList.toggle('opacity-60', disabled)
-    btn.classList.toggle('cursor-not-allowed', disabled)
-  }
-
-  /** @param {SubmitEvent} e */
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    hideStatus()
-    disableSubmit(true)
-
-    try {
-      /** @type {HTMLFormElement} */
-      const formEl = /** @type {any} */ (e.target)
-      const formData = new FormData(formEl)
-
-      // Sending FormData (multipart/form-data) to the SSR API route.
-      const endpoint = formEl.getAttribute('action') || '/api/contact'
-
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-        },
-        body: formData,
-      })
-
-      if (!res.ok) {
-        console.error('Contact action failed', res.status, res.statusText)
-        let msgEs = 'No se pudo enviar el mensaje. Inténtalo nuevamente.'
-        let msgEn = 'Could not send the message. Please try again.'
-
-        try {
-          const ct = res.headers.get('content-type') || ''
-          if (ct.includes('application/json')) {
-            const json = await res.json()
-            if (json?.message) {
-              msgEs = json.message
-              msgEn = json.message
-            }
-          } else {
-            const text = await res.text()
-            if (text) {
-              msgEs = text
-              msgEn = text
-            }
-          }
-        } catch {}
-
-        const isEn = document.documentElement.lang === 'en'
-        const msg = isEn ? msgEn : msgEs
-
-        showStatus(msg, 'error')
-        disableSubmit(false)
-        return
+      if (!form.checkValidity()) {
+        showStatus(
+          isEnglish ? 'Please review the required fields.' : 'Revisa los campos obligatorios.',
+          'error',
+        );
+        form.reportValidity();
+        return;
       }
 
-      formEl.reset()
+      setPending(true);
 
-      const isEn = document.documentElement.lang === 'en'
-      showStatus(isEn ? 'Message sent ✅ I will reply soon.' : 'Mensaje enviado ✅ Te responderé pronto.', 'success')
-    } catch {
-      const isEn = document.documentElement.lang === 'en'
-      showStatus(isEn ? 'Network error. Please try again.' : 'Error de red. Inténtalo nuevamente.', 'error')
-    } finally {
-      disableSubmit(false)
-    }
-  }
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
+        });
+        const payload = await response.json().catch(() => ({}));
 
-  if (form) form.addEventListener('submit', handleSubmit)
+        if (!response.ok) {
+          showStatus(
+            payload.message || (isEnglish
+              ? 'The message could not be sent. Please try again.'
+              : 'No se pudo enviar el mensaje. Inténtalo nuevamente.'),
+            'error',
+          );
+          return;
+        }
+
+        form.reset();
+        if (startedAt) startedAt.value = String(Date.now());
+        const turnstile = /** @type {any} */ (window).turnstile;
+        if (turnstile) turnstile.reset();
+        showStatus(
+          payload.message || (isEnglish
+            ? 'Message sent. I will reply soon.'
+            : 'Mensaje enviado. Te responderé pronto.'),
+          'success',
+        );
+      } catch {
+        showStatus(
+          isEnglish ? 'Network error. Please try again.' : 'Error de red. Inténtalo nuevamente.',
+          'error',
+        );
+      } finally {
+        setPending(false);
+      }
+    });
+  });
 </script>

@@ -1,126 +1,27 @@
 ---
-import Contact from '../sections/Contact.astro';
-import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import Experience from '../components/Experience.astro';
-import Skills from '../components/Skills.astro';
+import ExperienceDetails from '../components/ExperienceDetails.astro';
+import Hero from '../components/Hero.astro';
 import Projects from '../components/Projects.astro';
+import Services from '../components/Services.astro';
+import Skills from '../components/Skills.astro';
 import Layout from '../layouts/Layout.astro';
+import Contact from '../sections/Contact.astro';
 ---
 
-<Layout lang="es" title="David Beslanga – Frontend Developer">
+<Layout
+  lang="es"
+  title="Desarrollador web freelance en Lima | David Beslanga"
+  description="Desarrollo landing pages y sitios web rápidos, accesibles y orientados a conversión para empresas en Perú y Latinoamérica."
+>
   <Hero />
-  <About />
-  <Experience />
-  <!-- ROLES EXTENDIDOS -->
-  <section id="roles" class="max-w-5xl mx-auto px-4 py-16 space-y-10">
-    <h2 class="text-2xl font-semibold mb-6">Detalles de Experiencia</h2>
-    <!-- Verisure -->
-    <article id="rol-verisure" class="bg-white rounded-2xl shadow-sm p-8">
-      <h3 class="text-xl font-bold mb-2">Programador Front-End – Verisure </h3>
-      <p class="text-gray-500 mb-3">Mayo 2023 – Actualidad</p>
-      <p class="text-gray-700 mb-4">
-        Lideré la optimización técnica y visual de las landing pages de Verisure Perú y Latam, enfocándome en performance, accesibilidad y conversión.
-      </p>
-      <ul class="list-disc pl-6 text-gray-700 space-y-2">
-        <li>Reducción de tiempos de carga de 7s a menos de 3s con lazy loading, minificación de assets, optimización de imágenes y refactorización de código.</li>
-        <li>Rediseño de arquitectura de componentes y flujos de interacción, mejorando la accesibilidad (WCAG 2.1) y la tasa de conversión (CRO).</li>
-        <li>Desarrollo del Observatorio de Seguridad en WordPress, integrando datos dinámicos, estructura SEO y experiencia fluida.</li>
-        <li>Implementación del rediseño del blog corporativo en Drupal, priorizando escalabilidad, mantenibilidad y experiencia UX/UI.</li>
-        <li>Trabajo directo con equipos de diseño, SEO y marketing para alinear objetivos de negocio y experiencia digital.</li>
-      </ul>
-    </article>
-    <!-- Tottus -->
-    <article id="rol-tottus" class="bg-white rounded-2xl shadow-sm p-8">
-      <h3 class="text-xl font-bold mb-2">Desarrollador de Front-End – Tottus Chile </h3>
-      <p class="text-gray-500 mb-3">Setiembre 2021 – Enero 2024</p>
-      <p class="text-gray-700 mb-4">
-        Especialista en desarrollo y optimización de landing pages para campañas de ofertas y promociones de Tottus Chile.
-      </p>
-      <ul class="list-disc pl-6 text-gray-700 space-y-2">
-        <li>Diseño y desarrollo de landing pages modulares enfocadas en visibilidad, velocidad y conversión.</li>
-        <li>Implementación de arquitectura front-end eficiente y semántica HTML5 para mejorar SEO y accesibilidad.</li>
-        <li>Integración de sistemas de gestión de contenido dinámico (Firebase, Contentful, ContentStack).</li>
-        <li>Uso de jQuery y Bootstrap para interfaces responsivas y componentes reutilizables.</li>
-        <li>Mejoras en tasa de conversión y reducción de fricción en el flujo de usuario.</li>
-      </ul>
-    </article>
-    <!-- Centrum -->
-    <article id="rol-centrum" class="bg-white rounded-2xl shadow-sm p-8">
-      <h3 class="text-xl font-bold mb-2">Programador Web – Centrum PUCP </h3>
-      <p class="text-gray-500 mb-3">Abril 2020 – Setiembre 2021</p>
-      <p class="text-gray-700 mb-4">
-        Desarrollo de landing pages personalizadas e integración de automatización de marketing para Centrum PUCP.
-      </p>
-      <ul class="list-disc pl-6 text-gray-700 space-y-2">
-        <li>Desarrollo y optimización de landings personalizadas en Eloqua, integrando automatización de marketing y analítica avanzada.</li>
-        <li>Estructuras escalables con Bootstrap, HTML5 y CSS3, priorizando performance y diseño responsive.</li>
-        <li>Colaboración en adaptación visual de piezas gráficas con Photoshop y Figma.</li>
-        <li>Aseguramiento de consistencia de marca, accesibilidad y conversión.</li>
-        <li>Optimización del funnel de captación y presencia digital de la marca.</li>
-      </ul>
-    </article>
-    <!-- Electo -->
-    <article id="rol-electo" class="bg-white rounded-2xl shadow-sm p-8">
-      <h3 class="text-xl font-bold mb-2">Programador Web – Electo</h3>
-      <p class="text-gray-500 mb-3">Abril 2018 – Abril 2020</p>
-      <p class="text-gray-700 mb-4">
-        Desarrollo de campañas de email marketing, sitios web y blogs para clientes de Electo, priorizando compatibilidad, UX y SEO.
-      </p>
-      <ul class="list-disc pl-6 text-gray-700 space-y-2">
-        <li>Implementación de nuevas metodologías de maquetación HTML/CSS para emails, mejorando compatibilidad cross-client.</li>
-        <li>Maquetación de sitios web con Visual Studio, Fireworks y Photoshop, siguiendo estándares W3C.</li>
-        <li>Desarrollo de blogs y sitios en Laravel y WordPress, con enfoque en UX/UI, SEO y rendimiento.</li>
-        <li>Gestión de despliegues con FileZilla y aseguramiento de performance y escalabilidad.</li>
-        <li>Colaboración con equipos multidisciplinarios en proyectos de comunicación digital.</li>
-      </ul>
-    </article>
-  </section>
-  <Skills />
+  <Services />
   <Projects />
+  <Experience />
+  <ExperienceDetails />
+  <About />
+  <Skills />
   <Contact />
   <footer class="py-10 text-center text-sm text-gray-500">© {new Date().getFullYear()} David Beslanga</footer>
-  <script is:inline>
-    document.addEventListener('DOMContentLoaded', () => {
-      const forms = document.querySelectorAll('form[data-contact]');
-      forms.forEach((form) => {
-        const email = form.querySelector('input[name="email"]');
-        const message = form.querySelector('textarea[name="message"]');
-        const emailError = form.querySelector('[data-error="email"]');
-        const messageError = form.querySelector('[data-error="message"]');
-
-        form.addEventListener('submit', (event) => {
-          let valid = true;
-
-          const emailValue = email.value.trim();
-          const messageValue = message.value.trim();
-
-          // reset state
-          email.classList.remove('border-red-500');
-          message.classList.remove('border-red-500');
-          if (emailError) emailError.classList.add('hidden');
-          if (messageError) messageError.classList.add('hidden');
-
-          // simple email validation
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!emailRegex.test(emailValue)) {
-            valid = false;
-            email.classList.add('border-red-500');
-            if (emailError) emailError.classList.remove('hidden');
-          }
-
-          // message length validation
-          if (messageValue.length < 10) {
-            valid = false;
-            message.classList.add('border-red-500');
-            if (messageError) messageError.classList.remove('hidden');
-          }
-
-          if (!valid) {
-            event.preventDefault();
-          }
-        });
-      });
-    });
-  </script>
 </Layout>

@@ -1,13 +1,43 @@
 ---
-import ContactForm from "../components/ContactForm.astro";
+import { Icon } from 'astro-icon/components';
+import ContactForm from '../components/ContactForm.astro';
 
 const { lang = 'es' } = Astro.props;
+const isEnglish = lang === 'en';
 const t = {
-  title: lang === 'en' ? 'Contact' : 'Contacto',
+  eyebrow: isEnglish ? 'Start a project' : 'Empecemos un proyecto',
+  title: isEnglish ? 'Tell me what your business needs' : 'Cuéntame qué necesita tu negocio',
+  body: isEnglish
+    ? 'Share your goal and I will reply with initial recommendations, scope questions and the next step.'
+    : 'Cuéntame tu objetivo y te responderé con recomendaciones iniciales, preguntas de alcance y el siguiente paso.',
+  reply: isEnglish ? 'Reply within 1–2 business days' : 'Respuesta en 1–2 días hábiles',
+  direct: isEnglish ? 'Clear scope and practical recommendations' : 'Alcance claro y recomendaciones prácticas',
+  remote: isEnglish ? 'Remote work' : 'Trabajo remoto ',
+  emailLabel: isEnglish ? 'Or write directly to' : 'O escríbeme directamente a',
 };
 ---
 
-<section id="contact" data-spy="true" class="max-w-5xl mx-auto px-4 py-16 bg-white rounded-2xl shadow-sm">
-  <h2 class="text-2xl font-semibold mb-6">{t.title}</h2>
-  <ContactForm lang={lang} />
+<section id="contact" data-spy="true" class="bg-slate-950 py-16 text-white md:py-20">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+    <div class="lg:sticky lg:top-28">
+      <p class="text-sm font-bold uppercase tracking-[0.16em] text-blue-300">{t.eyebrow}</p>
+      <h2 class="mt-3 text-3xl font-bold md:text-4xl">{t.title}</h2>
+      <p class="mt-5 text-lg leading-8 text-slate-300">{t.body}</p>
+
+      <ul class="mt-8 space-y-4 text-sm font-medium text-slate-200">
+        <li class="flex gap-3"><Icon name="mdi:clock-outline" class="mt-0.5 h-5 w-5 shrink-0 text-blue-300" />{t.reply}</li>
+        <li class="flex gap-3"><Icon name="mdi:check-decagram-outline" class="mt-0.5 h-5 w-5 shrink-0 text-blue-300" />{t.direct}</li>
+        <li class="flex gap-3"><Icon name="mdi:web" class="mt-0.5 h-5 w-5 shrink-0 text-blue-300" />{t.remote}</li>
+      </ul>
+
+      <p class="mt-8 text-sm text-slate-400">{t.emailLabel}</p>
+      <a href="mailto:contact@davidbeslanga.com" class="mt-1 inline-block font-bold text-white underline decoration-blue-400 underline-offset-4 hover:text-blue-200">
+        contact@davidbeslanga.com
+      </a>
+    </div>
+
+    <div class="rounded-3xl bg-white p-6 shadow-2xl shadow-black/20 md:p-8">
+      <ContactForm lang={lang} />
+    </div>
+  </div>
 </section>

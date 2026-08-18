@@ -2,24 +2,24 @@
 const { lang = 'es' } = Astro.props;
 import { Icon } from "astro-icon/components";
 const nav = [
-  { id: 'about', label: lang === 'es' ? 'Sobre mí' : 'About' },
-  { id: 'experience', label: lang === 'es' ? 'Experiencia' : 'Experience' },
-  { id: 'skills', label: 'Skills' },
+  { id: 'services', label: lang === 'es' ? 'Servicios' : 'Services' },
   { id: 'projects', label: lang === 'es' ? 'Proyectos' : 'Projects' },
+  { id: 'experience', label: lang === 'es' ? 'Experiencia' : 'Experience' },
+  { id: 'about', label: lang === 'es' ? 'Sobre mí' : 'About' },
   { id: 'contact', label: lang === 'es' ? 'Contacto' : 'Contact' },
 ];
 ---
 <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
-  <a href="#about" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-blue-600 focus:text-white focus:px-3 focus:py-2 focus:rounded-md">{lang === 'es' ? 'Saltar al contenido' : 'Skip to content'}</a>
-  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-blue-600 focus:text-white focus:px-3 focus:py-2 focus:rounded-md">{lang === 'es' ? 'Saltar al contenido' : 'Skip to content'}</a>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <span aria-hidden="true" class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-600">
+      <span aria-hidden="true" class="hidden sm:inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-600">
         <Icon name="mdi:sparkles" class="w-3.5 h-3.5 text-white" />
       </span>
       <a href="#top" class="font-bold tracking-tight text-lg">David Beslanga</a>
     </div>
 
-    <nav class="hidden md:flex items-center gap-6" aria-label={lang === 'es' ? 'Navegación principal' : 'Main navigation'}>
+    <nav class="hidden lg:flex items-center gap-5 xl:gap-6" aria-label={lang === 'es' ? 'Navegación principal' : 'Main navigation'}>
       {nav.map((item) => (
         <a
           href={`#${item.id}`}
@@ -63,12 +63,39 @@ const nav = [
         download
         aria-label={lang === 'es' ? 'Descargar CV' : 'Download resume'}
         title={lang === 'es' ? 'Descargar CV' : 'Download resume'}
-        class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-xl transition"
+        class="inline-flex h-9 items-center gap-2 rounded-xl bg-blue-50 px-3 text-sm font-semibold text-blue-600 transition hover:bg-blue-100 sm:px-4"
       >
         <Icon name="fa6-solid:download" class="w-4 h-4" />
-        {lang === 'es' ? 'Resumen' : 'Resume'}
+        <span class="hidden sm:inline">{lang === 'es' ? 'Resumen' : 'Resume'}</span>
       </a>
+      <button
+        type="button"
+        data-menu-toggle
+        data-open-label={lang === 'es' ? 'Abrir menú' : 'Open menu'}
+        data-close-label={lang === 'es' ? 'Cerrar menú' : 'Close menu'}
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label={lang === 'es' ? 'Abrir menú' : 'Open menu'}
+        class="inline-flex h-9 w-9 items-center justify-center rounded-xl text-slate-700 transition hover:bg-slate-100 lg:hidden"
+      >
+        <Icon name="mdi:menu" class="h-5 w-5" data-menu-open-icon />
+        <Icon name="mdi:close" class="hidden h-5 w-5" data-menu-close-icon />
+      </button>
     </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-slate-100 bg-white lg:hidden">
+    <nav class="mx-auto grid max-w-6xl gap-1 px-4 py-3" aria-label={lang === 'es' ? 'Navegación móvil' : 'Mobile navigation'}>
+      {nav.map((item) => (
+        <a
+          href={`#${item.id}`}
+          data-mobile-nav-link
+          class="rounded-xl px-3 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50 hover:text-slate-950"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
   </div>
 </header>
 
@@ -81,6 +108,32 @@ const nav = [
 </style>
 
 <script is:raw>
+
+  const menuToggle = document.querySelector('[data-menu-toggle]');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuOpenIcon = document.querySelector('[data-menu-open-icon]');
+  const menuCloseIcon = document.querySelector('[data-menu-close-icon]');
+
+  const setMobileMenu = (open) => {
+    if (!menuToggle || !mobileMenu) return;
+    mobileMenu.classList.toggle('hidden', !open);
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', open ? menuToggle.dataset.closeLabel : menuToggle.dataset.openLabel);
+    menuOpenIcon?.classList.toggle('hidden', open);
+    menuCloseIcon?.classList.toggle('hidden', !open);
+  };
+
+  menuToggle?.addEventListener('click', () => {
+    setMobileMenu(menuToggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  document.querySelectorAll('[data-mobile-nav-link]').forEach((link) => {
+    link.addEventListener('click', () => setMobileMenu(false));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setMobileMenu(false);
+  });
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!prefersReduced) {

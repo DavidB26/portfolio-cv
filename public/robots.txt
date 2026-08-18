@@ -1,2 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /_actions/
+
+Sitemap: https://davidbeslanga.com/sitemap.xml
